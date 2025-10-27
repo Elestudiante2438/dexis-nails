@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DEXI’S NAILS</title>
+  <title>DEXI’S NAILS - Cuidado Profesional de Uñas</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
@@ -44,13 +44,13 @@
 <body class="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark">
   <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
     <div class="layout-container flex h-full grow flex-col">
-
       <!-- HEADER -->
       <header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm px-4 sm:px-10 py-3">
         <div class="flex items-center gap-3 text-text-light dark:text-text-dark">
           <span class="material-symbols-outlined text-accent-light dark:text-accent-dark text-2xl">spa</span>
           <h2 class="text-text-light dark:text-text-dark text-xl font-bold">DEXI’S NAILS</h2>
         </div>
+        <!-- Menú escritorio -->
         <nav class="hidden md:flex items-center gap-8">
           <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="index.html">Inicio</a>
           <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="02.servicios.html">Servicios</a>
@@ -62,108 +62,100 @@
           <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-text-light text-sm font-bold hover:bg-primary/80 transition-colors">
             <span class="truncate">Reservar Cita</span>
           </button>
-          <button class="md:hidden text-text-light dark:text-text-dark">
+          <!-- Botón menú móvil -->
+          <button class="mobile-menu-button md:hidden text-text-light dark:text-text-dark">
             <span class="material-symbols-outlined text-2xl">menu</span>
           </button>
         </div>
       </header>
 
-      <!-- CONTENIDO PRINCIPAL -->
-      <main class="flex-1">
-        <section class="relative flex min-h-[calc(100vh-68px)] items-center justify-center p-4">
-          <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style='background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url("assets/img/01.hero/index01-hero-salon.jpg");'></div>
-          <div class="relative z-10 flex max-w-3xl flex-col gap-6 text-center text-white">
-            <h1 class="text-4xl md:text-6xl font-bold leading-tight">Belleza y Bienestar para tus Manos y Pies</h1>
-            <p class="text-base md:text-lg">Expertas en manicura y podología. Tu momento de cuidado empieza aquí.</p>
-            <button class="mx-auto flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-text-light text-base font-bold hover:bg-primary/80 transition-colors">
-              <span class="truncate">Reserva tu cita</span>
-            </button>
-          </div>
-        </section>
+      <!-- Menú móvil -->
+      <nav class="mobile-menu hidden md:hidden absolute top-16 left-0 w-full bg-background-light dark:bg-background-dark shadow-lg z-50 flex flex-col items-center gap-4 py-4 px-4 border-b border-primary/30">
+        <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="index.html">Inicio</a>
+        <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="02.servicios.html">Servicios</a>
+        <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="03.galeria.html">Galería</a>
+        <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="04.blog.html">Blog</a>
+        <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="06.contacto.html">Contacto</a>
+      </nav>
 
-        <section class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
-          <div class="max-w-5xl mx-auto">
-            <h2 class="text-center text-3xl sm:text-4xl font-bold text-text-light dark:text-text-dark">Nuestros Servicios Estrella</h2>
-            <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              <div class="flex flex-col gap-4 text-center items-center">
-                <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl" style='background-image: url("assets/img/02.services/servicios01-manicura-clasica.jpg");'></div>
-                <div>
-                  <p class="text-xl font-bold text-text-light dark:text-text-dark">Manicura Clásica</p>
-                  <p class="text-sm text-accent-light dark:text-accent-dark mt-1">Un tratamiento completo para unas manos impecables.</p>
-                </div>
-              </div>
-              <div class="flex flex-col gap-4 text-center items-center">
-                <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl" style='background-image: url("assets/img/02.services/servicios06-pedicura-spa.jpg");'></div>
-                <div>
-                  <p class="text-xl font-bold text-text-light dark:text-text-dark">Pedicura Médica</p>
-                  <p class="text-sm text-accent-light dark:text-accent-dark mt-1">Cuidado especializado para la salud y estética de tus pies.</p>
-                </div>
-              </div>
-              <div class="flex flex-col gap-4 text-center items-center">
-                <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl" style='background-image: url("assets/img/02.services/servicios03-uñas-gel.jpg");'></div>
-                <div>
-                  <p class="text-xl font-bold text-text-light dark:text-text-dark">Esmaltado de Larga Duración</p>
-                  <p class="text-sm text-accent-light dark:text-accent-dark mt-1">Color y brillo duradero para tus uñas.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+      <!-- HERO con título y frase -->
+      <div class="relative flex min-h-[60vh] w-full items-center justify-center bg-cover bg-center bg-no-repeat" style='background-image: url("assets/img/01.hero/index01-hero-salon.png");'>
+        <div class="absolute inset-0 bg-black/40 dark:bg-black/50"></div>
+        <div class="relative z-10 text-center px-4 max-w-3xl">
+          <h1 class="text-white text-4xl md:text-6xl font-black tracking-tighter leading-tight mb-4">Bienvenida a DEXI’S NAILS</h1>
+          <p class="text-white/90 text-lg md:text-xl max-w-2xl mx-auto">Donde el arte y el cuidado se unen en cada uña.</p>
+        </div>
+      </div>
 
-        <section class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-primary/20 dark:bg-primary/10">
-          <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="lg:pr-12">
-              <h2 class="text-3xl sm:text-4xl font-bold text-text-light dark:text-text-dark">Resolvemos tus Dudas</h2>
-              <p class="mt-4 text-lg text-accent-light dark:text-accent-dark">Sabemos que puedes tener preguntas, ¡y nos encanta responderlas!</p>
-              <div class="mt-8 space-y-4">
-                <div>
-                  <h3 class="font-semibold text-lg text-text-light dark:text-text-dark">¿Qué diferencia hay entre pedicura médica y estética?</h3>
-                  <p class="text-accent-light dark:text-accent-dark mt-1">La pedicura médica se enfoca en la salud del pie, mientras que la estética se centra en el embellecimiento.</p>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-lg text-text-light dark:text-text-dark">¿Cuánto dura el esmaltado semipermanente?</h3>
-                  <p class="text-accent-light dark:text-accent-dark mt-1">Con el cuidado adecuado, puede durar impecable entre 2 y 3 semanas.</p>
-                </div>
+      <!-- SERVICIOS ESTRELLA (iconos corregidos) -->
+      <section class="py-16 px-4 bg-background-light dark:bg-background-dark">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-3xl font-bold text-center mb-12 text-text-light dark:text-text-dark">Nuestros Servicios Estrella</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center p-6 rounded-xl bg-primary/10 dark:bg-primary/5 hover:bg-primary/20 dark:hover:bg-primary/10 transition-colors">
+              <span class="material-symbols-outlined text-accent-light dark:text-accent-dark text-4xl mb-4 block">spa</span>
+              <h3 class="text-xl font-bold mb-2">Manicura de Lujo</h3>
+              <p class="text-accent-light dark:text-accent-dark">Tratamiento completo con esmaltado semipermanente y masaje relajante.</p>
+            </div>
+            <div class="text-center p-6 rounded-xl bg-primary/10 dark:bg-primary/5 hover:bg-primary/20 dark:hover:bg-primary/10 transition-colors">
+              <span class="material-symbols-outlined text-accent-light dark:text-accent-dark text-4xl mb-4 block">footprint</span>
+              <h3 class="text-xl font-bold mb-2">Pedicura Médica</h3>
+              <p class="text-accent-light dark:text-accent-dark">Cuidado profesional para pies con enfoque clínico y estético.</p>
+            </div>
+            <div class="text-center p-6 rounded-xl bg-primary/10 dark:bg-primary/5 hover:bg-primary/20 dark:hover:bg-primary/10 transition-colors">
+              <span class="material-symbols-outlined text-accent-light dark:text-accent-dark text-4xl mb-4 block">healing</span>
+              <h3 class="text-xl font-bold mb-2">Tratamientos Especiales</h3>
+              <p class="text-accent-light dark:text-accent-dark">Uñas encarnadas, hongos, ortonixia y más.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- GALERÍA RÁPIDA -->
+      <section class="py-16 bg-primary/10 dark:bg-primary/5 px-4">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-3xl font-bold text-center mb-8 text-text-light dark:text-text-dark">Galería de Trabajos</h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="aspect-square bg-center bg-no-repeat bg-cover rounded-lg" style='background-image: url("assets/img/03.gallery/galeria01-nude-dorado.jpg");'></div>
+            <div class="aspect-square bg-center bg-no-repeat bg-cover rounded-lg" style='background-image: url("assets/img/03.gallery/galeria03-colores-pastel.jpg");'></div>
+            <div class="aspect-square bg-center bg-no-repeat bg-cover rounded-lg" style='background-image: url("assets/img/03.gallery/galeria05-francesa-moderna.jpg");'></div>
+            <div class="aspect-square bg-center bg-no-repeat bg-cover rounded-lg" style='background-image: url("assets/img/03.gallery/galeria08-rosa-palido.jpg");'></div>
+          </div>
+          <div class="text-center mt-8">
+            <a href="03.galeria.html" class="inline-block bg-primary text-text-light font-bold py-2 px-6 rounded-lg hover:bg-primary/90 transition-colors">Ver toda la galería</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- BLOG DESTACADO -->
+      <section class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-3xl font-bold text-center mb-8 text-text-light dark:text-text-dark">Del Blog</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="flex flex-col gap-3 group">
+              <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl overflow-hidden">
+                <div class="w-full h-full bg-center bg-no-repeat bg-cover group-hover:scale-105 transition-transform duration-300" style='background-image: url("assets/img/05.blog/blog01-cuidados-uñas-fuertes.jpg");'></div>
+              </div>
+              <div>
+                <p class="text-text-light dark:text-white text-lg font-bold group-hover:text-primary transition-colors">5 Cuidados Esenciales para Uñas Fuertes</p>
+                <p class="text-accent-light dark:text-gray-400 text-sm">24 Mayo 2024</p>
               </div>
             </div>
-            <div class="relative aspect-video w-full rounded-xl overflow-hidden shadow-2xl">
-              <img alt="Miniatura de video sobre preguntas frecuentes" class="absolute inset-0 h-full w-full object-cover" src="assets/img/05.blog/blog02-podologia-preventiva.jpg"/>
-              <div class="absolute inset-0 bg-black/30 flex items-center justify-center">
-                <button class="bg-white/30 backdrop-blur-sm text-white rounded-full p-4 hover:bg-white/50 transition-colors">
-                  <span class="material-symbols-outlined text-5xl">play_arrow</span>
-                </button>
+            <div class="flex flex-col gap-3 group">
+              <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl overflow-hidden">
+                <div class="w-full h-full bg-center bg-no-repeat bg-cover group-hover:scale-105 transition-transform duration-300" style='background-image: url("assets/img/05.blog/blog02-podologia-preventiva.jpg");'></div>
+              </div>
+              <div>
+                <p class="text-text-light dark:text-white text-lg font-bold group-hover:text-primary transition-colors">Podología Preventiva: Clave para tu Bienestar</p>
+                <p class="text-accent-light dark:text-gray-400 text-sm">22 Mayo 2024</p>
               </div>
             </div>
           </div>
-        </section>
-
-        <section class="bg-primary/20 dark:bg-primary/10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
-          <div class="max-w-5xl mx-auto">
-            <h2 class="text-center text-3xl sm:text-4xl font-bold text-text-light dark:text-text-dark">Nuestra Galería de Arte</h2>
-            <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div class="overflow-hidden rounded-xl aspect-w-1 aspect-h-1"><img alt="Diseño floral" class="h-full w-full object-cover hover:scale-110 transition-transform duration-300" src="assets/img/03.gallery/galeria06-nail-art-floral.jpg"/></div>
-              <div class="overflow-hidden rounded-xl aspect-w-1 aspect-h-1"><img alt="Pedicura francesa" class="h-full w-full object-cover hover:scale-110 transition-transform duration-300" src="assets/img/03.gallery/galeria05-francesa-moderna.jpg"/></div>
-              <div class="overflow-hidden rounded-xl aspect-w-1 aspect-h-1"><img alt="Tonos pastel" class="h-full w-full object-cover hover:scale-110 transition-transform duration-300" src="assets/img/03.gallery/galeria03-colores-pastel.jpg"/></div>
-              <div class="overflow-hidden rounded-xl aspect-w-1 aspect-h-1"><img alt="Esmalte rojo" class="h-full w-full object-cover hover:scale-110 transition-transform duration-300" src="assets/img/03.gallery/galeria04-blanco-lechoso.jpg"/></div>
-            </div>
+          <div class="text-center mt-8">
+            <a href="04.blog.html" class="inline-block bg-primary text-text-light font-bold py-2 px-6 rounded-lg hover:bg-primary/90 transition-colors">Ver todos los artículos</a>
           </div>
-        </section>
-
-        <section class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
-          <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl sm:text-4xl font-bold text-text-light dark:text-text-dark">Lo que Dicen Nuestras Clientas</h2>
-            <div class="mt-12">
-              <img alt="Clienta satisfecha" class="h-16 w-16 rounded-full mx-auto" src="assets/img/04.team/acercade01-ana-especialista.jpg"/>
-              <blockquote class="mt-6">
-                <p class="text-lg font-medium text-text-light dark:text-text-dark">"¡El mejor tratamiento de pedicura que he recibido! El personal es increíblemente profesional y el ambiente es muy relajante. Mis pies nunca se han visto tan bien. ¡Volveré sin duda!"</p>
-              </blockquote>
-              <footer class="mt-4">
-                <p class="text-base font-semibold text-accent-light dark:text-accent-dark">Ana Pérez</p>
-              </footer>
-            </div>
-          </div>
-        </section>
-      </main>
+        </div>
+      </section>
 
       <!-- FOOTER -->
       <footer class="bg-primary/30 dark:bg-primary/20 mt-20">
@@ -221,7 +213,6 @@
           </div>
         </div>
       </footer>
-
     </div>
   </div>
   <script src="assets/js/scripts.js"></script>

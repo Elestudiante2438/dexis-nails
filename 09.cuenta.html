@@ -43,9 +43,29 @@
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark">
   <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
-    <div class="layout-container flex h-full grow flex-row">
-      
-      <!-- SIDEBAR DE NAVEGACIÓN -->
+    <div class="layout-container flex h-full grow flex-col md:flex-row">
+      <!-- HEADER (solo en móviles) -->
+      <header class="md:hidden sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm px-4 py-3 mb-6">
+        <div class="flex items-center gap-3 text-text-light dark:text-text-dark">
+          <span class="material-symbols-outlined text-accent-light dark:text-accent-dark text-2xl">spa</span>
+          <h2 class="text-text-light dark:text-text-dark text-xl font-bold">DEXI’S NAILS</h2>
+        </div>
+        <!-- Botón menú móvil -->
+        <button class="mobile-menu-button text-text-light dark:text-text-dark">
+          <span class="material-symbols-outlined text-2xl">menu</span>
+        </button>
+      </header>
+
+      <!-- Menú móvil (solo en móviles) -->
+      <nav class="mobile-menu md:hidden hidden absolute top-16 left-0 w-full bg-background-light dark:bg-background-dark shadow-lg z-50 flex flex-col items-center gap-4 py-4 px-4 border-b border-primary/30">
+        <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="index.html">Inicio</a>
+        <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="02.servicios.html">Servicios</a>
+        <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="03.galeria.html">Galería</a>
+        <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="04.blog.html">Blog</a>
+        <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="06.contacto.html">Contacto</a>
+      </nav>
+
+      <!-- SIDEBAR DE NAVEGACIÓN (solo en escritorio) -->
       <aside class="w-64 bg-background-light dark:bg-background-dark p-4 border-r border-solid border-accent-light/20 dark:border-accent-dark hidden md:flex flex-col gap-4">
         <div class="flex gap-3 items-center p-2">
           <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style='background-image: url("assets/img/04.team/acercade01-ana-especialista.jpg");'></div>
@@ -84,7 +104,6 @@
           <header class="mb-8">
             <p class="text-text-light dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Configuración de Cuenta</p>
           </header>
-
           <div class="space-y-8">
             <!-- PERFIL -->
             <div class="bg-background-light dark:bg-background-dark border border-accent-light/20 dark:border-accent-dark rounded-lg p-6">
@@ -104,7 +123,6 @@
                 </div>
               </div>
             </div>
-
             <!-- NOTIFICACIONES -->
             <div class="bg-background-light dark:bg-background-dark border border-accent-light/20 dark:border-accent-dark rounded-lg p-6">
               <h2 class="text-xl font-bold mb-6 text-text-light dark:text-text-dark">Notificaciones</h2>
@@ -139,7 +157,6 @@
                 </div>
               </div>
             </div>
-
             <!-- BOTÓN GUARDAR -->
             <div class="flex justify-end mt-6">
               <button class="bg-primary hover:bg-primary/90 text-text-light font-bold py-3 px-6 rounded-lg transition-colors">

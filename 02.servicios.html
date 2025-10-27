@@ -46,13 +46,13 @@
     <div class="layout-container flex h-full grow flex-col">
       <div class="px-4 md:px-20 lg:px-40 flex flex-1 justify-center py-10">
         <div class="layout-content-container flex flex-col max-w-5xl flex-1">
-
           <!-- HEADER -->
           <header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm px-4 sm:px-10 py-3 mb-10">
             <div class="flex items-center gap-3 text-text-light dark:text-text-dark">
               <span class="material-symbols-outlined text-accent-light dark:text-accent-dark text-2xl">spa</span>
               <h2 class="text-text-light dark:text-text-dark text-xl font-bold">DEXI’S NAILS</h2>
             </div>
+            <!-- Menú escritorio -->
             <nav class="hidden md:flex items-center gap-8">
               <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="index.html">Inicio</a>
               <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="02.servicios.html">Servicios</a>
@@ -64,17 +64,26 @@
               <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-text-light text-sm font-bold hover:bg-primary/80 transition-colors">
                 <span class="truncate">Reservar Cita</span>
               </button>
-              <button class="md:hidden text-text-light dark:text-text-dark">
+              <!-- Botón menú móvil -->
+              <button class="mobile-menu-button md:hidden text-text-light dark:text-text-dark">
                 <span class="material-symbols-outlined text-2xl">menu</span>
               </button>
             </div>
           </header>
 
+          <!-- Menú móvil -->
+          <nav class="mobile-menu hidden md:hidden absolute top-16 left-0 w-full bg-background-light dark:bg-background-dark shadow-lg z-50 flex flex-col items-center gap-4 py-4 px-4 border-b border-primary/30">
+            <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="index.html">Inicio</a>
+            <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="02.servicios.html">Servicios</a>
+            <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="03.galeria.html">Galería</a>
+            <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="04.blog.html">Blog</a>
+            <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="06.contacto.html">Contacto</a>
+          </nav>
+
           <!-- CONTENIDO -->
           <div class="flex flex-wrap justify-center text-center gap-3 p-4">
             <p class="text-4xl md:text-5xl font-black tracking-tighter leading-tight w-full">Descubre Nuestros Servicios Exclusivos</p>
           </div>
-
           <div class="py-8">
             <h2 class="text-2xl md:text-3xl font-bold tracking-tight px-4 pb-4 pt-5 flex items-center gap-3 justify-center text-center">
               <span class="material-symbols-outlined text-accent-light dark:text-accent-dark">spa</span> Manicura: Arte y Cuidado para tus Manos
@@ -122,7 +131,6 @@
               </div>
             </div>
           </div>
-
           <div class="py-8">
             <h2 class="text-2xl md:text-3xl font-bold tracking-tight px-4 pb-4 pt-5 flex items-center gap-3 justify-center text-center">
               <span class="material-symbols-outlined text-accent-light dark:text-accent-dark">footprint</span> Podología: Salud y Belleza para tus Pies
@@ -170,10 +178,8 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
-
       <!-- FOOTER -->
       <footer class="bg-primary/30 dark:bg-primary/20 mt-20">
         <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
@@ -230,7 +236,6 @@
           </div>
         </div>
       </footer>
-
     </div>
   </div>
   <script src="assets/js/scripts.js"></script>

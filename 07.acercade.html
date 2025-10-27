@@ -46,13 +46,13 @@
     <div class="layout-container flex h-full grow flex-col">
       <div class="px-4 md:px-20 lg:px-40 flex flex-1 justify-center py-5">
         <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-
           <!-- HEADER -->
           <header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm px-4 sm:px-10 py-3 mb-8">
             <div class="flex items-center gap-3 text-text-light dark:text-text-dark">
               <span class="material-symbols-outlined text-accent-light dark:text-accent-dark text-2xl">spa</span>
               <h2 class="text-text-light dark:text-text-dark text-xl font-bold">DEXI’S NAILS</h2>
             </div>
+            <!-- Menú escritorio -->
             <nav class="hidden md:flex items-center gap-8">
               <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="index.html">Inicio</a>
               <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="02.servicios.html">Servicios</a>
@@ -64,11 +64,21 @@
               <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-text-light text-sm font-bold hover:bg-primary/80 transition-colors">
                 <span class="truncate">Reservar Cita</span>
               </button>
-              <button class="md:hidden text-text-light dark:text-text-dark">
+              <!-- Botón menú móvil -->
+              <button class="mobile-menu-button md:hidden text-text-light dark:text-text-dark">
                 <span class="material-symbols-outlined text-2xl">menu</span>
               </button>
             </div>
           </header>
+
+          <!-- Menú móvil -->
+          <nav class="mobile-menu hidden md:hidden absolute top-16 left-0 w-full bg-background-light dark:bg-background-dark shadow-lg z-50 flex flex-col items-center gap-4 py-4 px-4 border-b border-primary/30">
+            <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="index.html">Inicio</a>
+            <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="02.servicios.html">Servicios</a>
+            <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="03.galeria.html">Galería</a>
+            <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="04.blog.html">Blog</a>
+            <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="06.contacto.html">Contacto</a>
+          </nav>
 
           <!-- CONTENIDO -->
           <main class="flex-1">
@@ -78,7 +88,6 @@
                 En DEXI’S NAILS, combinamos arte, salud y bienestar en cada servicio que ofrecemos.
               </p>
             </div>
-
             <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 p-4">
               <div>
                 <img alt="Interior elegante del salón DEXI’S NAILS" class="w-full rounded-xl shadow-lg" src="assets/img/01.hero/index01-hero-salon.jpg"/>
@@ -93,7 +102,6 @@
                 </p>
               </div>
             </div>
-
             <div class="mt-16 p-4">
               <h2 class="text-center text-3xl font-bold text-text-light dark:text-text-dark mb-12">Nuestro Equipo</h2>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -114,7 +122,6 @@
                 </div>
               </div>
             </div>
-
             <div class="mt-16 bg-primary/10 dark:bg-primary/5 p-8 rounded-xl text-center">
               <h2 class="text-2xl font-bold text-text-light dark:text-text-dark mb-4">Nuestros Valores</h2>
               <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
@@ -136,7 +143,6 @@
               </div>
             </div>
           </main>
-
           <!-- FOOTER -->
           <footer class="bg-primary/30 dark:bg-primary/20 mt-20">
             <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
@@ -193,7 +199,6 @@
               </div>
             </div>
           </footer>
-
         </div>
       </div>
     </div>

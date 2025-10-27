@@ -44,6 +44,40 @@
 <body class="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark">
   <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
     <div class="layout-container flex h-full grow flex-col">
+      <!-- HEADER -->
+      <header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm px-4 sm:px-10 py-3 mb-8">
+        <div class="flex items-center gap-3 text-text-light dark:text-text-dark">
+          <span class="material-symbols-outlined text-accent-light dark:text-accent-dark text-2xl">spa</span>
+          <h2 class="text-text-light dark:text-text-dark text-xl font-bold">DEXI’S NAILS</h2>
+        </div>
+        <!-- Menú escritorio -->
+        <nav class="hidden md:flex items-center gap-8">
+          <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="index.html">Inicio</a>
+          <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="02.servicios.html">Servicios</a>
+          <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="03.galeria.html">Galería</a>
+          <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="04.blog.html">Blog</a>
+          <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="06.contacto.html">Contacto</a>
+        </nav>
+        <div class="flex items-center gap-4">
+          <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-text-light text-sm font-bold hover:bg-primary/80 transition-colors">
+            <span class="truncate">Reservar Cita</span>
+          </button>
+          <!-- Botón menú móvil -->
+          <button class="mobile-menu-button md:hidden text-text-light dark:text-text-dark">
+            <span class="material-symbols-outlined text-2xl">menu</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Menú móvil -->
+      <nav class="mobile-menu hidden md:hidden absolute top-16 left-0 w-full bg-background-light dark:bg-background-dark shadow-lg z-50 flex flex-col items-center gap-4 py-4 px-4 border-b border-primary/30">
+        <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="index.html">Inicio</a>
+        <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="02.servicios.html">Servicios</a>
+        <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="03.galeria.html">Galería</a>
+        <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="04.blog.html">Blog</a>
+        <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="06.contacto.html">Contacto</a>
+      </nav>
+
       <div class="flex flex-1 justify-center">
         <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
           <div class="@container">
@@ -84,7 +118,6 @@
               <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg md:w-1/3" style='background-image: url("assets/img/01.hero/index01-hero-salon.jpg");'></div>
             </div>
           </div>
-
           <h2 class="text-text-light dark:text-text-dark text-[22px] font-bold px-4 pb-3 pt-8 flex items-center gap-2">
             <span class="material-symbols-outlined text-accent-light dark:text-accent-dark">download</span> Recursos Descargables
           </h2>
@@ -121,7 +154,6 @@
               </div>
             </div>
           </div>
-
           <h2 class="text-text-light dark:text-text-dark text-[22px] font-bold px-4 pb-3 pt-8 flex items-center gap-2">
             <span class="material-symbols-outlined text-accent-light dark:text-accent-dark">campaign</span> Comunicados de Prensa
           </h2>
@@ -149,7 +181,6 @@
               </div>
             </div>
           </div>
-
           <div class="py-12 px-4">
             <div class="text-center">
               <h3 class="text-text-light dark:text-text-dark text-2xl font-bold">¿Interesado en una colaboración?</h3>

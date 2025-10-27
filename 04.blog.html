@@ -46,13 +46,13 @@
     <div class="layout-container flex h-full grow flex-col">
       <div class="px-4 md:px-20 lg:px-40 flex flex-1 justify-center py-5">
         <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-
           <!-- HEADER -->
           <header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm px-4 sm:px-10 py-3 mb-8">
             <div class="flex items-center gap-3 text-text-light dark:text-text-dark">
               <span class="material-symbols-outlined text-accent-light dark:text-accent-dark text-2xl">spa</span>
               <h2 class="text-text-light dark:text-text-dark text-xl font-bold">DEXI’S NAILS</h2>
             </div>
+            <!-- Menú escritorio -->
             <nav class="hidden md:flex items-center gap-8">
               <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="index.html">Inicio</a>
               <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="02.servicios.html">Servicios</a>
@@ -64,18 +64,27 @@
               <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-text-light text-sm font-bold hover:bg-primary/80 transition-colors">
                 <span class="truncate">Reservar Cita</span>
               </button>
-              <button class="md:hidden text-text-light dark:text-text-dark">
+              <!-- Botón menú móvil -->
+              <button class="mobile-menu-button md:hidden text-text-light dark:text-text-dark">
                 <span class="material-symbols-outlined text-2xl">menu</span>
               </button>
             </div>
           </header>
+
+          <!-- Menú móvil -->
+          <nav class="mobile-menu hidden md:hidden absolute top-16 left-0 w-full bg-background-light dark:bg-background-dark shadow-lg z-50 flex flex-col items-center gap-4 py-4 px-4 border-b border-primary/30">
+            <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="index.html">Inicio</a>
+            <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="02.servicios.html">Servicios</a>
+            <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="03.galeria.html">Galería</a>
+            <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="04.blog.html">Blog</a>
+            <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="06.contacto.html">Contacto</a>
+          </nav>
 
           <!-- CONTENIDO -->
           <main class="flex-1">
             <div class="flex flex-wrap justify-between gap-3 p-4 mt-8">
               <p class="text-text-light dark:text-white text-4xl font-black leading-tight tracking-[-0.033em] min-w-72">Consejos de Expertos para tus Manos y Pies</p>
             </div>
-
             <div class="px-4 py-3">
               <label class="flex flex-col min-w-40 h-12 w-full">
                 <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
@@ -86,7 +95,6 @@
                 </div>
               </label>
             </div>
-
             <div class="flex gap-3 p-3 flex-wrap pr-4">
               <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary px-4 cursor-pointer hover:bg-primary/80 transition-colors">
                 <p class="text-text-light dark:text-white text-sm font-medium leading-normal">Manicura</p>
@@ -101,7 +109,6 @@
                 <p class="text-text-light dark:text-gray-300 text-sm font-medium leading-normal">Cuidados</p>
               </div>
             </div>
-
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
               <div class="flex flex-col gap-3 pb-3 group cursor-pointer">
                 <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl overflow-hidden">
@@ -164,7 +171,6 @@
                 </div>
               </div>
             </div>
-
             <div class="flex justify-center items-center gap-2 p-4 mt-8">
               <button class="flex items-center justify-center size-10 rounded-full text-text-light/50 dark:text-white/50 hover:bg-primary/20 dark:hover:bg-primary/10 transition-colors">
                 <span class="material-symbols-outlined">chevron_left</span>
@@ -179,7 +185,6 @@
               </button>
             </div>
           </main>
-
           <!-- FOOTER -->
           <footer class="bg-primary/30 dark:bg-primary/20 mt-20">
             <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
@@ -236,7 +241,6 @@
               </div>
             </div>
           </footer>
-
         </div>
       </div>
     </div>

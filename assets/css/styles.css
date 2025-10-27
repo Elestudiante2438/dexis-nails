@@ -1,7 +1,6 @@
 /* ==================================================
    DEXI’S NAILS – Estilos Globales
    ================================================== */
-
 :root {
   /* Colores de marca */
   --color-primary: #fae6d1;        /* Beige suave */
@@ -56,7 +55,6 @@ h1, h2, h3, h4, h5, h6 {
   transition: opacity 0.2s;
   font-size: 1rem;
 }
-
 .btn-primary:hover {
   opacity: 0.9;
 }
@@ -78,13 +76,13 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Ocultar scrollbar en navegadores modernos (opcional) */
+/* Ocultar scrollbar (opcional) */
 .hide-scrollbar {
-  -ms-overflow-style: none;  /* IE y Edge */
-  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 .hide-scrollbar::-webkit-scrollbar {
-  display: none;             /* Chrome, Safari, Opera */
+  display: none;
 }
 
 /* Estilos para tarjetas interactivas */
@@ -96,13 +94,18 @@ html {
   box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
-/* Responsive: ocultar menú móvil por defecto */
+/* ✅ MENÚ MÓVIL: ya no se usa display:none, se controla con Tailwind (.hidden) */
 .mobile-menu {
-  display: none;
+  /* vacío intencionalmente: el control lo hace Tailwind con .hidden */
 }
 
-@media (max-width: 768px) {
+/* Asegurar que el botón de menú siempre esté visible en móviles */
+.mobile-menu-button {
+  display: block;
+}
+
+@media (min-width: 768px) {
   .mobile-menu-button {
-    display: block;
+    display: none;
   }
 }

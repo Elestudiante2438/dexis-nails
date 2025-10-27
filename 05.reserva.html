@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Reserva tu Cita - DEXI’S NAILS</title>
+  <title>Reservar Cita - DEXI’S NAILS</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
@@ -45,14 +45,14 @@
   <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
     <div class="layout-container flex h-full grow flex-col">
       <div class="px-4 md:px-20 lg:px-40 flex flex-1 justify-center py-5">
-        <div class="layout-content-container flex flex-col max-w-7xl w-full flex-1 gap-8">
-
+        <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
           <!-- HEADER -->
           <header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm px-4 sm:px-10 py-3 mb-8">
             <div class="flex items-center gap-3 text-text-light dark:text-text-dark">
               <span class="material-symbols-outlined text-accent-light dark:text-accent-dark text-2xl">spa</span>
               <h2 class="text-text-light dark:text-text-dark text-xl font-bold">DEXI’S NAILS</h2>
             </div>
+            <!-- Menú escritorio -->
             <nav class="hidden md:flex items-center gap-8">
               <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="index.html">Inicio</a>
               <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="02.servicios.html">Servicios</a>
@@ -64,211 +64,144 @@
               <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-text-light text-sm font-bold hover:bg-primary/80 transition-colors">
                 <span class="truncate">Reservar Cita</span>
               </button>
-              <button class="md:hidden text-text-light dark:text-text-dark">
+              <!-- Botón menú móvil -->
+              <button class="mobile-menu-button md:hidden text-text-light dark:text-text-dark">
                 <span class="material-symbols-outlined text-2xl">menu</span>
               </button>
             </div>
           </header>
 
+          <!-- Menú móvil -->
+          <nav class="mobile-menu hidden md:hidden absolute top-16 left-0 w-full bg-background-light dark:bg-background-dark shadow-lg z-50 flex flex-col items-center gap-4 py-4 px-4 border-b border-primary/30">
+            <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="index.html">Inicio</a>
+            <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="02.servicios.html">Servicios</a>
+            <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="03.galeria.html">Galería</a>
+            <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="04.blog.html">Blog</a>
+            <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="06.contacto.html">Contacto</a>
+          </nav>
+
           <!-- CONTENIDO -->
-          <div class="flex flex-wrap justify-between gap-3 p-4">
-            <p class="text-text-light dark:text-white text-4xl font-black leading-tight tracking-[-0.033em] min-w-72">Agenda tu Experiencia de Bienestar</p>
-          </div>
-
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- PASOS DE RESERVA -->
-            <div class="lg:col-span-2 flex flex-col gap-8">
-              <!-- Servicios -->
-              <div>
-                <h2 class="text-text-light dark:text-white text-[22px] font-bold px-4 pb-3 pt-5 flex items-center gap-3 justify-center text-center">
-                  <span class="material-symbols-outlined text-accent-light dark:text-accent-dark">spa</span> Elige tu Servicio
-                </h2>
-                <div class="flex overflow-x-auto p-4 gap-4 hide-scrollbar">
-                  <div class="flex flex-col gap-4 rounded-xl bg-primary/20 dark:bg-primary/10 p-4 min-w-[180px] border-2 border-transparent hover:border-accent-light dark:hover:border-accent-dark transition-colors">
-                    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg" style='background-image: url("assets/img/02.services/servicios01-manicura-clasica.jpg");'></div>
-                    <div>
-                      <p class="text-lg font-bold">Manicura Básica</p>
-                      <p class="text-accent-light dark:text-accent-dark text-sm mt-1">$35</p>
-                    </div>
-                  </div>
-                  <div class="flex flex-col gap-4 rounded-xl bg-primary/20 dark:bg-primary/10 p-4 min-w-[180px] border-2 border-accent-light dark:border-accent-dark">
-                    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg" style='background-image: url("assets/img/02.services/servicios06-pedicura-spa.jpg");'></div>
-                    <div>
-                      <p class="text-lg font-bold">Pedicure Spa</p>
-                      <p class="text-accent-light dark:text-accent-dark text-sm mt-1">$55</p>
-                    </div>
-                  </div>
-                  <div class="flex flex-col gap-4 rounded-xl bg-primary/20 dark:bg-primary/10 p-4 min-w-[180px] border-2 border-transparent hover:border-accent-light dark:hover:border-accent-dark transition-colors">
-                    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg" style='background-image: url("assets/img/02.services/servicios03-uñas-gel.jpg");'></div>
-                    <div>
-                      <p class="text-lg font-bold">Uñas en Gel</p>
-                      <p class="text-accent-light dark:text-accent-dark text-sm mt-1">$65</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Especialistas -->
-              <div>
-                <h2 class="text-text-light dark:text-white text-[22px] font-bold px-4 pb-3 pt-5 flex items-center gap-3 justify-center text-center">
-                  <span class="material-symbols-outlined text-accent-light dark:text-accent-dark">person</span> Elige tu Especialista
-                </h2>
-                <div class="grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-4 p-4">
-                  <div class="flex flex-col items-center gap-3 rounded-xl p-4 bg-primary/10 dark:bg-primary/5 cursor-pointer hover:bg-primary/20 dark:hover:bg-primary/10 transition-colors">
-                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-14" style='background-image: url("assets/img/04.team/acercade01-ana-especialista.jpg");'></div>
-                    <div class="text-center">
-                      <p class="text-sm font-bold">Ana</p>
-                      <p class="text-xs text-accent-light dark:text-accent-dark">Manicura</p>
-                    </div>
-                  </div>
-                  <div class="flex flex-col items-center gap-3 rounded-xl p-4 bg-primary/20 dark:bg-primary/10 border-2 border-accent-light dark:border-accent-dark">
-                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-14" style='background-image: url("assets/img/04.team/acercade02-laura-podologa.jpg");'></div>
-                    <div class="text-center">
-                      <p class="text-sm font-bold">Laura</p>
-                      <p class="text-xs text-accent-light dark:text-accent-dark">Podología</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Fecha y Hora -->
-              <div>
-                <h2 class="text-text-light dark:text-white text-[22px] font-bold px-4 pb-3 pt-5 flex items-center gap-3 justify-center text-center">
-                  <span class="material-symbols-outlined text-accent-light dark:text-accent-dark">calendar_month</span> Selecciona Fecha y Hora
-                </h2>
-                <div class="bg-primary/10 dark:bg-primary/5 p-4 rounded-xl">
-                  <div class="flex justify-between items-center mb-4">
-                    <button class="p-2 rounded-full hover:bg-primary/20 dark:hover:bg-primary/10"><span class="material-symbols-outlined">chevron_left</span></button>
-                    <h3 class="font-bold">Octubre 2025</h3>
-                    <button class="p-2 rounded-full hover:bg-primary/20 dark:hover:bg-primary/10"><span class="material-symbols-outlined">chevron_right</span></button>
-                  </div>
-                  <div class="grid grid-cols-7 gap-1 text-center text-sm">
-                    <div class="text-accent-light dark:text-accent-dark">L</div>
-                    <div class="text-accent-light dark:text-accent-dark">M</div>
-                    <div class="text-accent-light dark:text-accent-dark">X</div>
-                    <div class="text-accent-light dark:text-accent-dark">J</div>
-                    <div class="text-accent-light dark:text-accent-dark">V</div>
-                    <div class="text-accent-light dark:text-accent-dark">S</div>
-                    <div class="text-accent-light dark:text-accent-dark">D</div>
-                    <!-- Días del mes -->
-                    <div class="p-2 text-gray-400">30</div>
-                    <div class="p-2">1</div>
-                    <div class="p-2">2</div>
-                    <div class="p-2 bg-primary text-text-light rounded-full">3</div>
-                    <div class="p-2">4</div>
-                    <div class="p-2">5</div>
-                    <div class="p-2">6</div>
-                  </div>
-                  <div class="mt-4">
-                    <h4 class="text-sm font-bold mb-2">Horarios disponibles (3 Oct)</h4>
-                    <div class="flex flex-wrap gap-2">
-                      <button class="px-3 py-1 text-sm rounded-lg border border-accent-light dark:border-accent-dark hover:bg-primary/20">10:00</button>
-                      <button class="px-3 py-1 text-sm rounded-lg bg-primary text-text-light border border-primary">11:00</button>
-                      <button class="px-3 py-1 text-sm rounded-lg border border-accent-light dark:border-accent-dark hover:bg-primary/20">12:00</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <main class="flex-1">
+            <div class="flex flex-wrap justify-center text-center gap-3 p-4">
+              <p class="text-4xl md:text-5xl font-black tracking-tighter leading-tight w-full">Reserva tu Cita</p>
+              <p class="text-lg text-accent-light dark:text-accent-dark max-w-2xl">Elige fecha, hora y servicio. Te responderemos en menos de 24 horas.</p>
             </div>
-
-            <!-- RESUMEN DE RESERVA -->
-            <div class="lg:col-span-1">
-              <div class="sticky top-8 bg-primary/10 dark:bg-primary/5 p-6 rounded-xl">
-                <h3 class="text-lg font-bold mb-4 text-text-light dark:text-text-dark">Tu Reserva</h3>
-                <div class="space-y-3 text-sm">
-                  <div class="flex justify-between">
-                    <span class="text-accent-light dark:text-accent-dark">Servicio:</span>
-                    <span>Pedicure Spa</span>
+            <div class="max-w-2xl mx-auto p-4 mt-8">
+              <form class="space-y-6">
+                <div>
+                  <label class="block text-text-light dark:text-text-dark text-sm font-medium mb-2">Nombre completo</label>
+                  <input type="text" class="w-full bg-background-light dark:bg-background-dark border border-primary/30 rounded-lg p-3 text-sm" placeholder="Ej: Ana García" required>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-text-light dark:text-text-dark text-sm font-medium mb-2">Teléfono</label>
+                    <input type="tel" class="w-full bg-background-light dark:bg-background-dark border border-primary/30 rounded-lg p-3 text-sm" placeholder="912 345 678" required>
                   </div>
-                  <div class="flex justify-between">
-                    <span class="text-accent-light dark:text-accent-dark">Especialista:</span>
-                    <span>Laura</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span class="text-accent-light dark:text-accent-dark">Fecha:</span>
-                    <span>Viernes, 3 Oct</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span class="text-accent-light dark:text-accent-dark">Hora:</span>
-                    <span>11:00 AM</span>
-                  </div>
-                  <div class="border-t border-primary/30 my-3"></div>
-                  <div class="flex justify-between text-base font-bold">
-                    <span>Total:</span>
-                    <span class="text-accent-light dark:text-accent-dark">$55</span>
+                  <div>
+                    <label class="block text-text-light dark:text-text-dark text-sm font-medium mb-2">Email</label>
+                    <input type="email" class="w-full bg-background-light dark:bg-background-dark border border-primary/30 rounded-lg p-3 text-sm" placeholder="tu@email.com" required>
                   </div>
                 </div>
-                <form class="mt-6 space-y-3">
-                  <input class="w-full bg-background-light dark:bg-background-dark border border-primary/30 rounded-lg p-2 text-sm" placeholder="Nombre" type="text"/>
-                  <input class="w-full bg-background-light dark:bg-background-dark border border-primary/30 rounded-lg p-2 text-sm" placeholder="Email" type="email"/>
-                  <input class="w-full bg-background-light dark:bg-background-dark border border-primary/30 rounded-lg p-2 text-sm" placeholder="Teléfono" type="tel"/>
-                </form>
-                <button class="w-full mt-6 bg-primary text-text-light font-bold py-3 rounded-lg hover:bg-primary/80 transition-colors">
-                  Confirmar Reserva
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-text-light dark:text-text-dark text-sm font-medium mb-2">Fecha deseada</label>
+                    <input type="date" class="w-full bg-background-light dark:bg-background-dark border border-primary/30 rounded-lg p-3 text-sm" required>
+                  </div>
+                  <div>
+                    <label class="block text-text-light dark:text-text-dark text-sm font-medium mb-2">Hora aproximada</label>
+                    <select class="w-full bg-background-light dark:bg-background-dark border border-primary/30 rounded-lg p-3 text-sm" required>
+                      <option value="">Selecciona una hora</option>
+                      <option value="10:00">10:00 AM</option>
+                      <option value="11:00">11:00 AM</option>
+                      <option value="12:00">12:00 PM</option>
+                      <option value="13:00">1:00 PM</option>
+                      <option value="16:00">4:00 PM</option>
+                      <option value="17:00">5:00 PM</option>
+                      <option value="18:00">6:00 PM</option>
+                      <option value="19:00">7:00 PM</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-text-light dark:text-text-dark text-sm font-medium mb-2">Servicio deseado</label>
+                  <select class="w-full bg-background-light dark:bg-background-dark border border-primary/30 rounded-lg p-3 text-sm" required>
+                    <option value="">Selecciona un servicio</option>
+                    <option value="manicura-clasica">Manicura Clásica</option>
+                    <option value="spa-manos">Spa de Manos</option>
+                    <option value="uñas-gel">Uñas en Gel</option>
+                    <option value="pedicura-spa">Pedicura Spa</option>
+                    <option value="tratamiento-uñas-encarnadas">Tratamiento Uñas Encarnadas</option>
+                    <option value="ortonixia">Ortonixia</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-text-light dark:text-text-dark text-sm font-medium mb-2">Notas adicionales (opcional)</label>
+                  <textarea class="w-full bg-background-light dark:bg-background-dark border border-primary/30 rounded-lg p-3 text-sm h-24 resize-none" placeholder="¿Alguna preferencia o alergia?"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-primary text-text-light font-bold py-3 rounded-lg hover:bg-primary/80 transition-colors">
+                  Solicitar Cita
                 </button>
+              </form>
+            </div>
+          </main>
+          <!-- FOOTER -->
+          <footer class="bg-primary/30 dark:bg-primary/20 mt-20">
+            <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+              <div class="md:grid md:grid-cols-3 md:gap-8">
+                <div class="space-y-4">
+                  <div class="flex items-center gap-3 text-text-light dark:text-text-dark">
+                    <span class="material-symbols-outlined text-accent-light dark:text-accent-dark text-2xl">spa</span>
+                    <h2 class="text-text-light dark:text-text-dark text-xl font-bold">DEXI’S NAILS</h2>
+                  </div>
+                  <p class="text-sm text-accent-light dark:text-accent-dark">Tu oasis de belleza y bienestar en la ciudad.</p>
+                  <div class="flex space-x-6">
+                    <a class="text-accent-light dark:text-accent-dark hover:text-text-light" href="#">
+                      <span class="sr-only">Facebook</span>
+                      <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+                    </a>
+                    <a class="text-accent-light dark:text-accent-dark hover:text-text-light" href="#">
+                      <span class="sr-only">Instagram</span>
+                      <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.08 2.525c.636-.247 1.363-.416 2.427-.465C9.53 2.013 9.884 2 12.315 2z"/></svg>
+                    </a>
+                  </div>
+                </div>
+                <div class="mt-10 grid grid-cols-2 gap-8 md:mt-0 md:col-span-2">
+                  <div class="md:grid md:grid-cols-2 md:gap-8">
+                    <div>
+                      <h3 class="text-sm font-semibold text-text-light dark:text-text-dark">Navegación</h3>
+                      <ul class="mt-6 space-y-4">
+                        <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="index.html">Inicio</a></li>
+                        <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="02.servicios.html">Servicios</a></li>
+                        <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="03.galeria.html">Galería</a></li>
+                        <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="04.blog.html">Blog</a></li>
+                      </ul>
+                    </div>
+                    <div class="mt-10 md:mt-0">
+                      <h3 class="text-sm font-semibold text-text-light dark:text-text-dark">Legal</h3>
+                      <ul class="mt-6 space-y-4">
+                        <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="#">Política de Privacidad</a></li>
+                        <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="#">Términos del Servicio</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="text-sm font-semibold text-text-light dark:text-text-dark">Contacto</h3>
+                    <ul class="mt-6 space-y-4 text-sm text-accent-light dark:text-accent-dark">
+                      <li>Calle Falsa 123, Ciudad</li>
+                      <li>912 345 678</li>
+                      <li>hola@dexisnails.com</li>
+                      <li>Horario: Lun - Sáb, 10am - 8pm</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-8 border-t border-primary pt-8">
+                <p class="text-xs text-accent-light dark:text-accent-dark">© 2025 DEXI’S NAILS. Todos los derechos reservados.</p>
               </div>
             </div>
-          </div>
+          </footer>
         </div>
       </div>
-
-      <!-- FOOTER -->
-      <footer class="bg-primary/30 dark:bg-primary/20 mt-20">
-        <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
-          <div class="md:grid md:grid-cols-3 md:gap-8">
-            <div class="space-y-4">
-              <div class="flex items-center gap-3 text-text-light dark:text-text-dark">
-                <span class="material-symbols-outlined text-accent-light dark:text-accent-dark text-2xl">spa</span>
-                <h2 class="text-text-light dark:text-text-dark text-xl font-bold">DEXI’S NAILS</h2>
-              </div>
-              <p class="text-sm text-accent-light dark:text-accent-dark">Tu oasis de belleza y bienestar en la ciudad.</p>
-              <div class="flex space-x-6">
-                <a class="text-accent-light dark:text-accent-dark hover:text-text-light" href="#">
-                  <span class="sr-only">Facebook</span>
-                  <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
-                </a>
-                <a class="text-accent-light dark:text-accent-dark hover:text-text-light" href="#">
-                  <span class="sr-only">Instagram</span>
-                  <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.08 2.525c.636-.247 1.363-.416 2.427-.465C9.53 2.013 9.884 2 12.315 2z"/></svg>
-                </a>
-              </div>
-            </div>
-            <div class="mt-10 grid grid-cols-2 gap-8 md:mt-0 md:col-span-2">
-              <div class="md:grid md:grid-cols-2 md:gap-8">
-                <div>
-                  <h3 class="text-sm font-semibold text-text-light dark:text-text-dark">Navegación</h3>
-                  <ul class="mt-6 space-y-4">
-                    <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="index.html">Inicio</a></li>
-                    <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="02.servicios.html">Servicios</a></li>
-                    <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="03.galeria.html">Galería</a></li>
-                    <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="04.blog.html">Blog</a></li>
-                  </ul>
-                </div>
-                <div class="mt-10 md:mt-0">
-                  <h3 class="text-sm font-semibold text-text-light dark:text-text-dark">Legal</h3>
-                  <ul class="mt-6 space-y-4">
-                    <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="#">Política de Privacidad</a></li>
-                    <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="#">Términos del Servicio</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div>
-                <h3 class="text-sm font-semibold text-text-light dark:text-text-dark">Contacto</h3>
-                <ul class="mt-6 space-y-4 text-sm text-accent-light dark:text-accent-dark">
-                  <li>Calle Falsa 123, Ciudad</li>
-                  <li>912 345 678</li>
-                  <li>hola@dexisnails.com</li>
-                  <li>Horario: Lun - Sáb, 10am - 8pm</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="mt-8 border-t border-primary pt-8">
-            <p class="text-xs text-accent-light dark:text-accent-dark">© 2025 DEXI’S NAILS. Todos los derechos reservados.</p>
-          </div>
-        </div>
-      </footer>
-
     </div>
   </div>
   <script src="assets/js/scripts.js"></script>
