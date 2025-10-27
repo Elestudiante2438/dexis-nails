@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kit de Prensa - DEXI’S NAILS</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#fae6d1",
+            "background-light": "#fcfaf8",
+            "background-dark": "#211911",
+            "text-light": "#1b150e",
+            "text-dark": "#f3ede7",
+            "accent-light": "#97744e",
+            "accent-dark": "#cba884"
+          },
+          fontFamily: {
+            "display": ["Manrope", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "0.75rem",
+            "xl": "1rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Manrope', sans-serif;
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark">
+  <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+    <div class="layout-container flex h-full grow flex-col">
+      <div class="flex flex-1 justify-center">
+        <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+          <div class="@container">
+            <div class="@[480px]:p-4">
+              <div class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4 text-center" style='background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url("assets/img/01.hero/index01-hero-salon.jpg");'>
+                <div class="flex flex-col gap-2">
+                  <h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl">Kit de Prensa</h1>
+                  <h2 class="text-white/90 text-sm font-normal leading-normal @[480px]:text-base">Recursos para Medios y Colaboradores</h2>
+                </div>
+                <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-primary text-text-light text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base hover:bg-primary/80 transition-colors">
+                  <span class="truncate">Contáctanos</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="px-4 py-8 sm:px-6 lg:px-8">
+            <p class="text-text-light dark:text-text-dark text-base font-normal leading-relaxed text-center max-w-3xl mx-auto">
+              En DEXI’S NAILS, fusionamos arte, salud y bienestar en cada servicio. Fundado en 2020, somos un referente en manicura y podología de alta gama, comprometidos con la excelencia, la higiene y la experiencia personalizada.
+            </p>
+          </div>
+          <div class="p-4">
+            <div class="flex flex-col md:flex-row items-stretch justify-between gap-6 rounded-xl bg-background-light dark:bg-background-dark p-6 shadow-sm">
+              <div class="flex flex-[2] flex-col gap-4 justify-center">
+                <div class="flex flex-col gap-1">
+                  <p class="text-text-light dark:text-text-dark text-lg font-bold">Contacto de Prensa</p>
+                  <p class="text-accent-light dark:text-accent-dark text-sm">
+                    Para consultas de medios, por favor contactar a:<br/>
+                    <strong>Ana García</strong>, Directora de Comunicación<br/>
+                    prensa@dexisnails.com<br/>
+                    912 345 678
+                  </p>
+                </div>
+                <a class="flex w-fit cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-primary/20 dark:bg-primary/30 text-text-light dark:text-text-dark text-sm font-medium hover:bg-primary/40 dark:hover:bg-primary/50 transition-colors" href="mailto:prensa@dexisnails.com">
+                  <span class="truncate">Enviar correo</span>
+                  <span class="material-symbols-outlined ml-2 text-base">east</span>
+                </a>
+              </div>
+              <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg md:w-1/3" style='background-image: url("assets/img/01.hero/index01-hero-salon.jpg");'></div>
+            </div>
+          </div>
+
+          <h2 class="text-text-light dark:text-text-dark text-[22px] font-bold px-4 pb-3 pt-8 flex items-center gap-2">
+            <span class="material-symbols-outlined text-accent-light dark:text-accent-dark">download</span> Recursos Descargables
+          </h2>
+          <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 p-4">
+            <div class="flex flex-col gap-3">
+              <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg" style='background-image: url("assets/img/Logo.jpg");'></div>
+              <div>
+                <p class="text-text-light dark:text-text-dark text-base font-medium">Logotipo Principal</p>
+                <p class="text-accent-light dark:text-accent-dark text-sm">
+                  <a class="hover:underline" href="#">JPG</a>, 
+                  <a class="hover:underline" href="#">PNG</a>, 
+                  <a class="hover:underline" href="#">SVG</a>
+                </p>
+              </div>
+            </div>
+            <div class="flex flex-col gap-3">
+              <div class="w-full bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
+                <span class="material-symbols-outlined text-6xl text-text-light dark:text-text-dark">style</span>
+              </div>
+              <div>
+                <p class="text-text-light dark:text-text-dark text-base font-medium">Guía de Marca</p>
+                <p class="text-accent-light dark:text-accent-dark text-sm">
+                  <a class="hover:underline" href="#">Descargar PDF</a>
+                </p>
+              </div>
+            </div>
+            <div class="flex flex-col gap-3">
+              <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg" style='background-image: url("assets/img/03.gallery/galeria02-pedicura-medica.jpg");'></div>
+              <div>
+                <p class="text-text-light dark:text-text-dark text-base font-medium">Fotografías de Alta Resolución</p>
+                <p class="text-accent-light dark:text-accent-dark text-sm">
+                  <a class="hover:underline" href="#">Ver galería</a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <h2 class="text-text-light dark:text-text-dark text-[22px] font-bold px-4 pb-3 pt-8 flex items-center gap-2">
+            <span class="material-symbols-outlined text-accent-light dark:text-accent-dark">campaign</span> Comunicados de Prensa
+          </h2>
+          <div class="px-4 py-2">
+            <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-700">
+              <div class="py-4 flex justify-between items-center gap-4">
+                <div>
+                  <p class="text-text-light dark:text-text-dark font-medium">Lanzamiento de Nuevo Servicio de Podología Estética</p>
+                  <p class="text-accent-light dark:text-accent-dark text-sm">15 de Octubre, 2023</p>
+                </div>
+                <a class="text-accent-light dark:text-accent-dark flex items-center gap-2 text-sm font-bold" href="#">
+                  <span>Leer más</span>
+                  <span class="material-symbols-outlined text-base">arrow_forward</span>
+                </a>
+              </div>
+              <div class="py-4 flex justify-between items-center gap-4">
+                <div>
+                  <p class="text-text-light dark:text-text-dark font-medium">Nuestro Salón Gana el Premio 'Mejor Cuidado de Uñas 2023'</p>
+                  <p class="text-accent-light dark:text-accent-dark text-sm">2 de Septiembre, 2023</p>
+                </div>
+                <a class="text-accent-light dark:text-accent-dark flex items-center gap-2 text-sm font-bold" href="#">
+                  <span>Leer más</span>
+                  <span class="material-symbols-outlined text-base">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="py-12 px-4">
+            <div class="text-center">
+              <h3 class="text-text-light dark:text-text-dark text-2xl font-bold">¿Interesado en una colaboración?</h3>
+              <p class="text-accent-light dark:text-accent-dark mt-2 max-w-xl mx-auto">
+                Nos encantaría escuchar tus ideas. Contáctanos para explorar oportunidades de colaboración, entrevistas o cualquier otra consulta de medios.
+              </p>
+              <button class="mt-6 flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-text-light text-base font-bold hover:bg-primary/80 transition-colors mx-auto">
+                <span class="truncate">Hablemos</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="assets/js/scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+/* ==================================================
+   DEXI’S NAILS – Estilos Globales
+   ================================================== */
+
+:root {
+  /* Colores de marca */
+  --color-primary: #fae6d1;        /* Beige suave */
+  --color-accent: #97744e;         /* Dorado/marrón */
+  --color-text: #1b150e;           /* Marrón oscuro */
+  --color-bg-light: #fcfaf8;       /* Fondo claro */
+  --color-bg-dark: #211911;        /* Fondo oscuro */
+  --color-border: #f3ede7;         /* Borde claro */
+}
+
+/* Reset y base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background-color: var(--color-bg-light);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+/* Modo oscuro */
+.dark {
+  background-color: var(--color-bg-dark);
+  color: #fcfaf8;
+}
+
+/* Tipografía y encabezados */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+/* Íconos de Material Symbols */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-size: 24px;
+}
+
+/* Botones */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  font-weight: bold;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  font-size: 1rem;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+/* Enlaces */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Imágenes responsivas */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Scroll suave */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ocultar scrollbar en navegadores modernos (opcional) */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE y Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari, Opera */
+}
+
+/* Estilos para tarjetas interactivas */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* Responsive: ocultar menú móvil por defecto */
+.mobile-menu {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-button {
+    display: block;
+  }
+}

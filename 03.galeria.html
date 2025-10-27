@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galería - DEXI’S NAILS</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#fae6d1",
+            "background-light": "#fcfaf8",
+            "background-dark": "#211911",
+            "text-light": "#1b150e",
+            "text-dark": "#f8f7f6",
+            "accent-light": "#97744e",
+            "accent-dark": "#d3b89b"
+          },
+          fontFamily: {
+            "display": ["Manrope", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "0.75rem",
+            "xl": "1rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark">
+  <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+    <div class="layout-container flex h-full grow flex-col">
+      <div class="px-4 md:px-20 lg:px-40 flex flex-1 justify-center py-5">
+        <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+
+          <!-- HEADER -->
+          <header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm px-4 sm:px-10 py-3 mb-8">
+            <div class="flex items-center gap-3 text-text-light dark:text-text-dark">
+              <span class="material-symbols-outlined text-accent-light dark:text-accent-dark text-2xl">spa</span>
+              <h2 class="text-text-light dark:text-text-dark text-xl font-bold">DEXI’S NAILS</h2>
+            </div>
+            <nav class="hidden md:flex items-center gap-8">
+              <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="index.html">Inicio</a>
+              <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="02.servicios.html">Servicios</a>
+              <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="03.galeria.html">Galería</a>
+              <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="04.blog.html">Blog</a>
+              <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="06.contacto.html">Contacto</a>
+            </nav>
+            <div class="flex items-center gap-4">
+              <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-text-light text-sm font-bold hover:bg-primary/80 transition-colors">
+                <span class="truncate">Reservar Cita</span>
+              </button>
+              <button class="md:hidden text-text-light dark:text-text-dark">
+                <span class="material-symbols-outlined text-2xl">menu</span>
+              </button>
+            </div>
+          </header>
+
+          <!-- CONTENIDO -->
+          <main class="flex-1">
+            <div class="flex flex-wrap justify-between gap-3 p-4 mt-8 text-center">
+              <div class="flex w-full flex-col gap-3">
+                <p class="text-text-light dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Nuestra Galería de Cuidado y Estilo</p>
+                <p class="text-gray-500 dark:text-gray-400 text-base font-normal leading-normal">Inspírate con transformaciones reales y descubre la dedicación que ponemos en cada detalle.</p>
+              </div>
+            </div>
+
+            <div class="flex px-4 py-3 justify-center">
+              <div class="flex h-12 flex-col sm:flex-row w-full max-w-lg items-center justify-center rounded-lg bg-primary/20 dark:bg-primary/10 p-1 gap-1">
+                <label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-lg px-3 has-[:checked]:bg-background-light has-[:checked]:dark:bg-background-dark has-[:checked]:shadow-md has-[:checked]:text-accent-light text-text-light dark:text-text-dark text-sm font-medium leading-normal transition-all duration-300">
+                  <span class="truncate">Resultados Reales</span>
+                  <input checked class="invisible w-0" name="gallery-filter" type="radio" value="Antes y Después"/>
+                </label>
+                <label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-lg px-3 has-[:checked]:bg-background-light has-[:checked]:dark:bg-background-dark has-[:checked]:shadow-md has-[:checked]:text-accent-light text-text-light dark:text-text-dark text-sm font-medium leading-normal transition-all duration-300">
+                  <span class="truncate">Tendencias 2025</span>
+                  <input class="invisible w-0" name="gallery-filter" type="radio" value="Tendencias 2025"/>
+                </label>
+                <label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-lg px-3 has-[:checked]:bg-background-light has-[:checked]:dark:bg-background-dark has-[:checked]:shadow-md has-[:checked]:text-accent-light text-text-light dark:text-text-dark text-sm font-medium leading-normal transition-all duration-300">
+                  <span class="truncate">Pedicuras Favoritas</span>
+                  <input class="invisible w-0" name="gallery-filter" type="radio" value="Pedicuras Top"/>
+                </label>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 p-4">
+              <div class="group relative flex flex-col gap-3 overflow-hidden rounded-xl">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-transform duration-300 group-hover:scale-105" style='background-image: url("assets/img/03.gallery/galeria06-nail-art-floral.jpg");'></div>
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+                </div>
+              </div>
+              <div class="group relative flex flex-col gap-3 overflow-hidden rounded-xl">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-transform duration-300 group-hover:scale-105" style='background-image: url("assets/img/03.gallery/galeria02-pedicura-medica.jpg");'></div>
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+                </div>
+              </div>
+              <div class="group relative flex flex-col gap-3 overflow-hidden rounded-xl">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-transform duration-300 group-hover:scale-105" style='background-image: url("assets/img/03.gallery/galeria03-colores-pastel.jpg");'></div>
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+                </div>
+              </div>
+              <div class="group relative flex flex-col gap-3 overflow-hidden rounded-xl">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-transform duration-300 group-hover:scale-105" style='background-image: url("assets/img/03.gallery/galeria04-blanco-lechoso.jpg");'></div>
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+                </div>
+              </div>
+              <div class="group relative flex flex-col gap-3 overflow-hidden rounded-xl">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-transform duration-300 group-hover:scale-105" style='background-image: url("assets/img/03.gallery/galeria05-francesa-moderna.jpg");'></div>
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+                </div>
+              </div>
+              <div class="group relative flex flex-col gap-3 overflow-hidden rounded-xl">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-transform duration-300 group-hover:scale-105" style='background-image: url("assets/img/03.gallery/galeria01-nude-dorado.jpg");'></div>
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+                </div>
+              </div>
+              <div class="group relative flex flex-col gap-3 overflow-hidden rounded-xl">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-transform duration-300 group-hover:scale-105" style='background-image: url("assets/img/03.gallery/galeria07-uña-encarnada-resultado.jpg");'></div>
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+                </div>
+              </div>
+              <div class="group relative flex flex-col gap-3 overflow-hidden rounded-xl">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-transform duration-300 group-hover:scale-105" style='background-image: url("assets/img/03.gallery/galeria08-rosa-palido.jpg");'></div>
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex px-4 py-8 justify-center">
+              <button class="flex min-w-[84px] w-full max-w-sm cursor-pointer items-center justify-center overflow-hidden rounded-full h-14 px-6 bg-primary text-text-light text-lg font-bold hover:bg-primary/80 transition-colors shadow-lg">
+                <span class="truncate">Agenda tu Momento de Cuidado</span>
+              </button>
+            </div>
+          </main>
+
+          <!-- FOOTER -->
+          <footer class="bg-primary/30 dark:bg-primary/20 mt-20">
+            <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+              <div class="md:grid md:grid-cols-3 md:gap-8">
+                <div class="space-y-4">
+                  <div class="flex items-center gap-3 text-text-light dark:text-text-dark">
+                    <span class="material-symbols-outlined text-accent-light dark:text-accent-dark text-2xl">spa</span>
+                    <h2 class="text-text-light dark:text-text-dark text-xl font-bold">DEXI’S NAILS</h2>
+                  </div>
+                  <p class="text-sm text-accent-light dark:text-accent-dark">Tu oasis de belleza y bienestar en la ciudad.</p>
+                  <div class="flex space-x-6">
+                    <a class="text-accent-light dark:text-accent-dark hover:text-text-light" href="#">
+                      <span class="sr-only">Facebook</span>
+                      <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+                    </a>
+                    <a class="text-accent-light dark:text-accent-dark hover:text-text-light" href="#">
+                      <span class="sr-only">Instagram</span>
+                      <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.08 2.525c.636-.247 1.363-.416 2.427-.465C9.53 2.013 9.884 2 12.315 2z"/></svg>
+                    </a>
+                  </div>
+                </div>
+                <div class="mt-10 grid grid-cols-2 gap-8 md:mt-0 md:col-span-2">
+                  <div class="md:grid md:grid-cols-2 md:gap-8">
+                    <div>
+                      <h3 class="text-sm font-semibold text-text-light dark:text-text-dark">Navegación</h3>
+                      <ul class="mt-6 space-y-4">
+                        <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="index.html">Inicio</a></li>
+                        <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="02.servicios.html">Servicios</a></li>
+                        <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="03.galeria.html">Galería</a></li>
+                        <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="04.blog.html">Blog</a></li>
+                      </ul>
+                    </div>
+                    <div class="mt-10 md:mt-0">
+                      <h3 class="text-sm font-semibold text-text-light dark:text-text-dark">Legal</h3>
+                      <ul class="mt-6 space-y-4">
+                        <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="#">Política de Privacidad</a></li>
+                        <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="#">Términos del Servicio</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="text-sm font-semibold text-text-light dark:text-text-dark">Contacto</h3>
+                    <ul class="mt-6 space-y-4 text-sm text-accent-light dark:text-accent-dark">
+                      <li>Calle Falsa 123, Ciudad</li>
+                      <li>912 345 678</li>
+                      <li>hola@dexisnails.com</li>
+                      <li>Horario: Lun - Sáb, 10am - 8pm</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-8 border-t border-primary pt-8">
+                <p class="text-xs text-accent-light dark:text-accent-dark">© 2025 DEXI’S NAILS. Todos los derechos reservados.</p>
+              </div>
+            </div>
+          </footer>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="assets/js/scripts.js"></script>
+</body>
+</html>

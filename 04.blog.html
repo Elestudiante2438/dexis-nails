@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog - DEXI’S NAILS</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#fae6d1",
+            "background-light": "#f8f7f6",
+            "background-dark": "#211911",
+            "text-light": "#1b150e",
+            "text-dark": "#f8f7f6",
+            "accent-light": "#97744e",
+            "accent-dark": "#d3b89b"
+          },
+          fontFamily: {
+            "display": ["Manrope", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "0.75rem",
+            "xl": "1rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark">
+  <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+    <div class="layout-container flex h-full grow flex-col">
+      <div class="px-4 md:px-20 lg:px-40 flex flex-1 justify-center py-5">
+        <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+
+          <!-- HEADER -->
+          <header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm px-4 sm:px-10 py-3 mb-8">
+            <div class="flex items-center gap-3 text-text-light dark:text-text-dark">
+              <span class="material-symbols-outlined text-accent-light dark:text-accent-dark text-2xl">spa</span>
+              <h2 class="text-text-light dark:text-text-dark text-xl font-bold">DEXI’S NAILS</h2>
+            </div>
+            <nav class="hidden md:flex items-center gap-8">
+              <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="index.html">Inicio</a>
+              <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="02.servicios.html">Servicios</a>
+              <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="03.galeria.html">Galería</a>
+              <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="04.blog.html">Blog</a>
+              <a class="text-text-light dark:text-text-dark text-sm font-medium hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="06.contacto.html">Contacto</a>
+            </nav>
+            <div class="flex items-center gap-4">
+              <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-text-light text-sm font-bold hover:bg-primary/80 transition-colors">
+                <span class="truncate">Reservar Cita</span>
+              </button>
+              <button class="md:hidden text-text-light dark:text-text-dark">
+                <span class="material-symbols-outlined text-2xl">menu</span>
+              </button>
+            </div>
+          </header>
+
+          <!-- CONTENIDO -->
+          <main class="flex-1">
+            <div class="flex flex-wrap justify-between gap-3 p-4 mt-8">
+              <p class="text-text-light dark:text-white text-4xl font-black leading-tight tracking-[-0.033em] min-w-72">Consejos de Expertos para tus Manos y Pies</p>
+            </div>
+
+            <div class="px-4 py-3">
+              <label class="flex flex-col min-w-40 h-12 w-full">
+                <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                  <div class="text-accent-light dark:text-gray-400 flex border-none bg-primary/30 dark:bg-gray-800 items-center justify-center pl-4 rounded-l-lg border-r-0">
+                    <span class="material-symbols-outlined">search</span>
+                  </div>
+                  <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-white focus:outline-0 focus:ring-0 border-none bg-primary/30 dark:bg-gray-800 focus:border-none h-full placeholder:text-accent-light dark:placeholder:text-gray-400 px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Buscar artículos..." value=""/>
+                </div>
+              </label>
+            </div>
+
+            <div class="flex gap-3 p-3 flex-wrap pr-4">
+              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary px-4 cursor-pointer hover:bg-primary/80 transition-colors">
+                <p class="text-text-light dark:text-white text-sm font-medium leading-normal">Manicura</p>
+              </div>
+              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary/30 dark:bg-gray-800 px-4 cursor-pointer hover:bg-primary/50 dark:hover:bg-primary/20 transition-colors">
+                <p class="text-text-light dark:text-gray-300 text-sm font-medium leading-normal">Podología</p>
+              </div>
+              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary/30 dark:bg-gray-800 px-4 cursor-pointer hover:bg-primary/50 dark:hover:bg-primary/20 transition-colors">
+                <p class="text-text-light dark:text-gray-300 text-sm font-medium leading-normal">Tendencias</p>
+              </div>
+              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary/30 dark:bg-gray-800 px-4 cursor-pointer hover:bg-primary/50 dark:hover:bg-primary/20 transition-colors">
+                <p class="text-text-light dark:text-gray-300 text-sm font-medium leading-normal">Cuidados</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+              <div class="flex flex-col gap-3 pb-3 group cursor-pointer">
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl overflow-hidden">
+                  <div class="w-full h-full bg-center bg-no-repeat bg-cover group-hover:scale-105 transition-transform duration-300" style='background-image: url("assets/img/05.blog/blog01-cuidados-uñas-fuertes.jpg");'></div>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <p class="text-text-light dark:text-white text-base font-bold leading-normal group-hover:text-primary transition-colors">5 Cuidados Esenciales para Uñas Fuertes y Saludables</p>
+                  <p class="text-accent-light dark:text-gray-400 text-sm font-normal leading-normal">Un breve extracto del artículo sobre cuidados de uñas...</p>
+                  <p class="text-accent-light dark:text-gray-500 text-xs font-normal leading-normal mt-1">24 Mayo 2024 - Manicura</p>
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 pb-3 group cursor-pointer">
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl overflow-hidden">
+                  <div class="w-full h-full bg-center bg-no-repeat bg-cover group-hover:scale-105 transition-transform duration-300" style='background-image: url("assets/img/05.blog/blog02-podologia-preventiva.jpg");'></div>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <p class="text-text-light dark:text-white text-base font-bold leading-normal group-hover:text-primary transition-colors">Podología Preventiva: ¿Por Qué es Clave para tu Bienestar?</p>
+                  <p class="text-accent-light dark:text-gray-400 text-sm font-normal leading-normal">Un breve extracto del artículo sobre podología...</p>
+                  <p class="text-accent-light dark:text-gray-500 text-xs font-normal leading-normal mt-1">22 Mayo 2024 - Podología</p>
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 pb-3 group cursor-pointer">
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl overflow-hidden">
+                  <div class="w-full h-full bg-center bg-no-repeat bg-cover group-hover:scale-105 transition-transform duration-300" style='background-image: url("assets/img/05.blog/blog03-tendencias-2025.jpg");'></div>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <p class="text-text-light dark:text-white text-base font-bold leading-normal group-hover:text-primary transition-colors">Descubre las Tendencias en Manicura y Pedicura para 2025</p>
+                  <p class="text-accent-light dark:text-gray-400 text-sm font-normal leading-normal">Un breve extracto del artículo sobre tendencias...</p>
+                  <p class="text-accent-light dark:text-gray-500 text-xs font-normal leading-normal mt-1">20 Mayo 2024 - Tendencias</p>
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 pb-3 group cursor-pointer">
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl overflow-hidden">
+                  <div class="w-full h-full bg-center bg-no-repeat bg-cover group-hover:scale-105 transition-transform duration-300" style='background-image: url("assets/img/05.blog/blog04-pedicura-medica.jpg");'></div>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <p class="text-text-light dark:text-white text-base font-bold leading-normal group-hover:text-primary transition-colors">Los Secretos de una Pedicura Médica: Beneficios que Desconocías</p>
+                  <p class="text-accent-light dark:text-gray-400 text-sm font-normal leading-normal">Un breve extracto del artículo sobre pedicura médica...</p>
+                  <p class="text-accent-light dark:text-gray-500 text-xs font-normal leading-normal mt-1">18 Mayo 2024 - Podología</p>
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 pb-3 group cursor-pointer">
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl overflow-hidden">
+                  <div class="w-full h-full bg-center bg-no-repeat bg-cover group-hover:scale-105 transition-transform duration-300" style='background-image: url("assets/img/05.blog/blog05-nail-art-ideas.jpg");'></div>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <p class="text-text-light dark:text-white text-base font-bold leading-normal group-hover:text-primary transition-colors">El Arte en tus Uñas: Ideas y Diseños para Inspirarte</p>
+                  <p class="text-accent-light dark:text-gray-400 text-sm font-normal leading-normal">Descubre las últimas tendencias en nail art y encuentra tu estilo.</p>
+                  <p class="text-accent-light dark:text-gray-500 text-xs font-normal leading-normal mt-1">15 Mayo 2024 - Manicura</p>
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 pb-3 group cursor-pointer">
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl overflow-hidden">
+                  <div class="w-full h-full bg-center bg-no-repeat bg-cover group-hover:scale-105 transition-transform duration-300" style='background-image: url("assets/img/05.blog/blog06-pedicura-casa.jpg");'></div>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <p class="text-text-light dark:text-white text-base font-bold leading-normal group-hover:text-primary transition-colors">Cómo Hacer una Pedicura en Casa como una Profesional</p>
+                  <p class="text-accent-light dark:text-gray-400 text-sm font-normal leading-normal">Sigue nuestros consejos para un cuidado de pies perfecto.</p>
+                  <p class="text-accent-light dark:text-gray-500 text-xs font-normal leading-normal mt-1">12 Mayo 2024 - Cuidados</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex justify-center items-center gap-2 p-4 mt-8">
+              <button class="flex items-center justify-center size-10 rounded-full text-text-light/50 dark:text-white/50 hover:bg-primary/20 dark:hover:bg-primary/10 transition-colors">
+                <span class="material-symbols-outlined">chevron_left</span>
+              </button>
+              <button class="flex items-center justify-center size-10 rounded-full bg-primary text-text-light font-bold text-sm">1</button>
+              <button class="flex items-center justify-center size-10 rounded-full text-text-light dark:text-white hover:bg-primary/20 dark:hover:bg-primary/10 font-bold text-sm transition-colors">2</button>
+              <button class="flex items-center justify-center size-10 rounded-full text-text-light dark:text-white hover:bg-primary/20 dark:hover:bg-primary/10 font-bold text-sm transition-colors">3</button>
+              <span class="text-text-light dark:text-white">...</span>
+              <button class="flex items-center justify-center size-10 rounded-full text-text-light dark:text-white hover:bg-primary/20 dark:hover:bg-primary/10 font-bold text-sm transition-colors">8</button>
+              <button class="flex items-center justify-center size-10 rounded-full text-text-light dark:text-white hover:bg-primary/20 dark:hover:bg-primary/10 transition-colors">
+                <span class="material-symbols-outlined">chevron_right</span>
+              </button>
+            </div>
+          </main>
+
+          <!-- FOOTER -->
+          <footer class="bg-primary/30 dark:bg-primary/20 mt-20">
+            <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+              <div class="md:grid md:grid-cols-3 md:gap-8">
+                <div class="space-y-4">
+                  <div class="flex items-center gap-3 text-text-light dark:text-text-dark">
+                    <span class="material-symbols-outlined text-accent-light dark:text-accent-dark text-2xl">spa</span>
+                    <h2 class="text-text-light dark:text-text-dark text-xl font-bold">DEXI’S NAILS</h2>
+                  </div>
+                  <p class="text-sm text-accent-light dark:text-accent-dark">Tu oasis de belleza y bienestar en la ciudad.</p>
+                  <div class="flex space-x-6">
+                    <a class="text-accent-light dark:text-accent-dark hover:text-text-light" href="#">
+                      <span class="sr-only">Facebook</span>
+                      <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+                    </a>
+                    <a class="text-accent-light dark:text-accent-dark hover:text-text-light" href="#">
+                      <span class="sr-only">Instagram</span>
+                      <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.08 2.525c.636-.247 1.363-.416 2.427-.465C9.53 2.013 9.884 2 12.315 2z"/></svg>
+                    </a>
+                  </div>
+                </div>
+                <div class="mt-10 grid grid-cols-2 gap-8 md:mt-0 md:col-span-2">
+                  <div class="md:grid md:grid-cols-2 md:gap-8">
+                    <div>
+                      <h3 class="text-sm font-semibold text-text-light dark:text-text-dark">Navegación</h3>
+                      <ul class="mt-6 space-y-4">
+                        <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="index.html">Inicio</a></li>
+                        <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="02.servicios.html">Servicios</a></li>
+                        <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="03.galeria.html">Galería</a></li>
+                        <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="04.blog.html">Blog</a></li>
+                      </ul>
+                    </div>
+                    <div class="mt-10 md:mt-0">
+                      <h3 class="text-sm font-semibold text-text-light dark:text-text-dark">Legal</h3>
+                      <ul class="mt-6 space-y-4">
+                        <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="#">Política de Privacidad</a></li>
+                        <li><a class="text-sm text-accent-light dark:text-accent-dark hover:text-text-light" href="#">Términos del Servicio</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="text-sm font-semibold text-text-light dark:text-text-dark">Contacto</h3>
+                    <ul class="mt-6 space-y-4 text-sm text-accent-light dark:text-accent-dark">
+                      <li>Calle Falsa 123, Ciudad</li>
+                      <li>912 345 678</li>
+                      <li>hola@dexisnails.com</li>
+                      <li>Horario: Lun - Sáb, 10am - 8pm</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-8 border-t border-primary pt-8">
+                <p class="text-xs text-accent-light dark:text-accent-dark">© 2025 DEXI’S NAILS. Todos los derechos reservados.</p>
+              </div>
+            </div>
+          </footer>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="assets/js/scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cuenta - DEXI’S NAILS</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#fae6d1",
+            "background-light": "#fcfaf8",
+            "background-dark": "#211911",
+            "text-light": "#1b150e",
+            "text-dark": "#f8f7f6",
+            "accent-light": "#97744e",
+            "accent-dark": "#d3b89b"
+          },
+          fontFamily: {
+            "display": ["Manrope", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "0.75rem",
+            "xl": "1rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark">
+  <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+    <div class="layout-container flex h-full grow flex-row">
+      
+      <!-- SIDEBAR DE NAVEGACIÓN -->
+      <aside class="w-64 bg-background-light dark:bg-background-dark p-4 border-r border-solid border-accent-light/20 dark:border-accent-dark hidden md:flex flex-col gap-4">
+        <div class="flex gap-3 items-center p-2">
+          <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style='background-image: url("assets/img/04.team/acercade01-ana-especialista.jpg");'></div>
+          <div class="flex flex-col">
+            <h1 class="text-text-light dark:text-text-dark text-base font-medium">Ana García</h1>
+            <p class="text-accent-light/70 dark:text-accent-dark/70 text-sm">hola@dexisnails.com</p>
+          </div>
+        </div>
+        <nav class="flex flex-col gap-2 mt-4">
+          <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-light dark:text-text-dark hover:bg-primary/20 dark:hover:bg-primary/10 transition-colors" href="index.html">
+            <span class="material-symbols-outlined">home</span>
+            <p class="text-sm font-medium">Inicio</p>
+          </a>
+          <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20 dark:bg-primary/10 text-text-light dark:text-text-dark" href="09.cuenta.html">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">person</span>
+            <p class="text-sm font-medium">Mi Cuenta</p>
+          </a>
+          <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-light dark:text-text-dark hover:bg-primary/20 dark:hover:bg-primary/10 transition-colors" href="05.reserva.html">
+            <span class="material-symbols-outlined">calendar_month</span>
+            <p class="text-sm font-medium">Mis Citas</p>
+          </a>
+          <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-light dark:text-text-dark hover:bg-primary/20 dark:hover:bg-primary/10 transition-colors" href="#">
+            <span class="material-symbols-outlined">notifications</span>
+            <p class="text-sm font-medium">Notificaciones</p>
+          </a>
+          <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-light dark:text-text-dark hover:bg-primary/20 dark:hover:bg-primary/10 transition-colors mt-auto" href="index.html">
+            <span class="material-symbols-outlined">logout</span>
+            <p class="text-sm font-medium">Cerrar Sesión</p>
+          </a>
+        </nav>
+      </aside>
+
+      <!-- CONTENIDO PRINCIPAL -->
+      <main class="flex-1 p-4 md:p-10">
+        <div class="max-w-3xl mx-auto">
+          <header class="mb-8">
+            <p class="text-text-light dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Configuración de Cuenta</p>
+          </header>
+
+          <div class="space-y-8">
+            <!-- PERFIL -->
+            <div class="bg-background-light dark:bg-background-dark border border-accent-light/20 dark:border-accent-dark rounded-lg p-6">
+              <h2 class="text-xl font-bold mb-4 text-text-light dark:text-text-dark">Información Personal</h2>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium mb-1">Nombre</label>
+                  <input class="w-full bg-background-light dark:bg-background-dark border border-accent-light/30 dark:border-accent-dark/50 rounded-lg p-2" value="Ana" type="text"/>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium mb-1">Apellidos</label>
+                  <input class="w-full bg-background-light dark:bg-background-dark border border-accent-light/30 dark:border-accent-dark/50 rounded-lg p-2" value="García" type="text"/>
+                </div>
+                <div class="sm:col-span-2">
+                  <label class="block text-sm font-medium mb-1">Email</label>
+                  <input class="w-full bg-background-light dark:bg-background-dark border border-accent-light/30 dark:border-accent-dark/50 rounded-lg p-2" value="hola@dexisnails.com" type="email"/>
+                </div>
+              </div>
+            </div>
+
+            <!-- NOTIFICACIONES -->
+            <div class="bg-background-light dark:bg-background-dark border border-accent-light/20 dark:border-accent-dark rounded-lg p-6">
+              <h2 class="text-xl font-bold mb-6 text-text-light dark:text-text-dark">Notificaciones</h2>
+              <div class="space-y-5">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <div class="text-text-light dark:text-text-dark flex items-center justify-center rounded-lg bg-primary/20 dark:bg-primary/10 size-10">
+                      <span class="material-symbols-outlined">notifications</span>
+                    </div>
+                    <p class="text-text-light dark:text-text-dark">Recibir notificaciones</p>
+                  </div>
+                  <label class="relative flex h-8 w-14 cursor-pointer items-center rounded-full bg-accent-light/20 dark:bg-accent-dark/30 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary">
+                    <div class="h-full w-7 rounded-full bg-white dark:bg-background-light"></div>
+                    <input checked class="invisible absolute" type="checkbox"/>
+                  </label>
+                </div>
+                <div class="pl-14 space-y-4">
+                  <div class="flex items-center justify-between">
+                    <p>Recordatorios de citas</p>
+                    <label class="relative flex h-7 w-12 cursor-pointer items-center rounded-full bg-accent-light/20 dark:bg-accent-dark/30 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary">
+                      <div class="h-full w-5 rounded-full bg-white dark:bg-background-light"></div>
+                      <input checked class="invisible absolute" type="checkbox"/>
+                    </label>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <p>Ofertas y promociones</p>
+                    <label class="relative flex h-7 w-12 cursor-pointer items-center rounded-full bg-accent-light/20 dark:bg-accent-dark/30 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary">
+                      <div class="h-full w-5 rounded-full bg-white dark:bg-background-light"></div>
+                      <input class="invisible absolute" type="checkbox"/>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BOTÓN GUARDAR -->
+            <div class="flex justify-end mt-6">
+              <button class="bg-primary hover:bg-primary/90 text-text-light font-bold py-3 px-6 rounded-lg transition-colors">
+                Guardar Cambios
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="assets/js/scripts.js"></script>
+</body>
+</html>
