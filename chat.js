@@ -69,7 +69,7 @@ async function chatSend() {
   chatShowTyping();
   try {
     const clienteNombre = (typeof clienteActual !== 'undefined' && clienteActual) ? clienteActual.nombre : null;
-    const response = await fetch('/.netlify/functions/chat', {
+    const response = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ messages: chatHistory.slice(-12), clienteNombre })
