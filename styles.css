@@ -578,3 +578,19 @@ button,input,textarea,select{font-family:var(--font-body)}
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
+
+/* ── ADMIN SCROLL AMPLIO ── */
+#secAdmin .panel-body,
+#secAdmin .section-inner {
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  max-height: calc(100vh - 200px);
+}
+.admin-panel.active {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+/* Scrollbar visible */
+#secAdmin ::-webkit-scrollbar { width: 6px; }
+#secAdmin ::-webkit-scrollbar-track { background: rgba(255,255,255,.05); border-radius: 3px; }
+#secAdmin ::-webkit-scrollbar-thumb { background: rgba(0,245,212,.4); border-radius: 3px; }
