@@ -346,21 +346,42 @@ function gBindInput(){
   },{passive:true});
   sec.addEventListener('mousedown', e=>{ if(e.button===0) gShoot(); });
   sec.addEventListener('contextmenu', e=>e.preventDefault());
+  // ── TOUCH: joystick virtual ──
+  let touchStartX=0, touchStartY=0, touchActive=false;
   sec.addEventListener('touchstart', e=>{
+    e.preventDefault();
     if(e.touches.length){
       const r=gCanvas.getBoundingClientRect();
-      G.mouse.x=e.touches[0].clientX-r.left;
-      G.mouse.y=e.touches[0].clientY-r.top;
+      touchStartX=e.touches[0].clientX-r.left;
+      touchStartY=e.touches[0].clientY-r.top;
+      touchActive=true;
+      G.mouse.x=touchStartX;
+      G.mouse.y=touchStartY;
       gShoot();
     }
-  },{passive:true});
+  },{passive:false});
   sec.addEventListener('touchmove', e=>{
-    if(e.touches.length){
+    e.preventDefault();
+    if(e.touches.length && touchActive){
       const r=gCanvas.getBoundingClientRect();
-      G.mouse.x=e.touches[0].clientX-r.left;
-      G.mouse.y=e.touches[0].clientY-r.top;
+      const tx=e.touches[0].clientX-r.left;
+      const ty=e.touches[0].clientY-r.top;
+      G.mouse.x=tx; G.mouse.y=ty;
+      const ddx=tx-touchStartX, ddy=ty-touchStartY;
+      const dist=Math.hypot(ddx,ddy);
+      if(dist>12){
+        G.touchDir.x=ddx/dist;
+        G.touchDir.y=ddy/dist;
+      } else {
+        G.touchDir.x=0; G.touchDir.y=0;
+      }
     }
-  },{passive:true});
+  },{passive:false});
+  sec.addEventListener('touchend', e=>{
+    e.preventDefault();
+    touchActive=false;
+    G.touchDir.x=0; G.touchDir.y=0;
+  },{passive:false});
   document.addEventListener('keydown', gKeyDown);
   document.addEventListener('keyup',   gKeyUp);
 }
