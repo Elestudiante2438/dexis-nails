@@ -346,40 +346,32 @@ function gBindInput(){
   },{passive:true});
   sec.addEventListener('mousedown', e=>{ if(e.button===0) gShoot(); });
   sec.addEventListener('contextmenu', e=>e.preventDefault());
-  // ── TOUCH: joystick virtual ──
-  let touchStartX=0, touchStartY=0, touchActive=false;
+  // ── TOUCH: nave sigue el dedo ──
+  G.touchTarget = null;
   sec.addEventListener('touchstart', e=>{
     e.preventDefault();
     if(e.touches.length){
       const r=gCanvas.getBoundingClientRect();
-      touchStartX=e.touches[0].clientX-r.left;
-      touchStartY=e.touches[0].clientY-r.top;
-      touchActive=true;
-      G.mouse.x=touchStartX;
-      G.mouse.y=touchStartY;
+      const tx=e.touches[0].clientX-r.left;
+      const ty=e.touches[0].clientY-r.top;
+      G.touchTarget = {x:tx, y:ty};
+      G.mouse.x=tx; G.mouse.y=ty;
       gShoot();
     }
   },{passive:false});
   sec.addEventListener('touchmove', e=>{
     e.preventDefault();
-    if(e.touches.length && touchActive){
+    if(e.touches.length){
       const r=gCanvas.getBoundingClientRect();
       const tx=e.touches[0].clientX-r.left;
       const ty=e.touches[0].clientY-r.top;
+      G.touchTarget = {x:tx, y:ty};
       G.mouse.x=tx; G.mouse.y=ty;
-      const ddx=tx-touchStartX, ddy=ty-touchStartY;
-      const dist=Math.hypot(ddx,ddy);
-      if(dist>12){
-        G.touchDir.x=ddx/dist;
-        G.touchDir.y=ddy/dist;
-      } else {
-        G.touchDir.x=0; G.touchDir.y=0;
-      }
     }
   },{passive:false});
   sec.addEventListener('touchend', e=>{
     e.preventDefault();
-    touchActive=false;
+    G.touchTarget = null;
     G.touchDir.x=0; G.touchDir.y=0;
   },{passive:false});
   document.addEventListener('keydown', gKeyDown);
@@ -526,7 +518,18 @@ function gUpdate(){
   if(G.keys['ArrowDown'] ||G.keys['KeyS']) dy+=SHIP_SPEED;
   if(G.keys['ArrowLeft'] ||G.keys['KeyA']) dx-=SHIP_SPEED;
   if(G.keys['ArrowRight']||G.keys['KeyD']) dx+=SHIP_SPEED;
-  dx+=G.touchDir.x*SHIP_SPEED; dy+=G.touchDir.y*SHIP_SPEED;
+  // Móvil: mover nave hacia donde está el dedo
+  if(G.touchTarget){
+    const tdx=G.touchTarget.x - G.ship.x;
+    const tdy=G.touchTarget.y - G.ship.y;
+    const tdist=Math.hypot(tdx,tdy);
+    if(tdist>8){
+      dx += (tdx/tdist)*SHIP_SPEED;
+      dy += (tdy/tdist)*SHIP_SPEED;
+    }
+  } else {
+    dx+=G.touchDir.x*SHIP_SPEED; dy+=G.touchDir.y*SHIP_SPEED;
+  }
   const spd = gHasPower('speed')?1.65:1;
   // WRAP-AROUND: sale por un borde, entra por el opuesto
   const margin = 28;
