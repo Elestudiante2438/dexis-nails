@@ -107,14 +107,10 @@ function startGame(){
     <div id="gOverScore" style="font-family:'Orbitron',sans-serif;font-size:clamp(.85rem,4vw,1.3rem);color:${GCOL.dorado};text-align:center">Puntuación: 0</div>
     <div id="gOverWave"  style="font-family:'Orbitron',sans-serif;font-size:clamp(.55rem,2.5vw,.7rem);color:rgba(255,215,0,.6);text-align:center"></div>
     <div id="gLeaderboard" style="margin-top:8px;width:min(280px,90%)"></div>
-    <button id="gBtnRestart" style="margin-top:8px;background:linear-gradient(135deg,${GCOL.fucsia},${GCOL.morado});border:none;color:white;padding:10px 32px;border-radius:30px;font-family:'Orbitron',sans-serif;font-size:clamp(.6rem,3vw,.75rem);letter-spacing:2px;cursor:pointer;pointer-events:all">▶ REINICIAR</button>
+
   `;
   sec.appendChild(over);
-  const btnR = over.querySelector('#gBtnRestart');
-  btnR.style.zIndex = '9999';
-  btnR.style.position = 'relative';
-  btnR.onclick = ()=>{ gameRestart(); };
-  btnR.addEventListener('touchstart', e=>{ e.stopPropagation(); gameRestart(); },{passive:false});
+
 
   // ── CSS animaciones ──
   gInjectCSS();

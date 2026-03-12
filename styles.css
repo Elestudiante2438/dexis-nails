@@ -567,3 +567,14 @@ button,input,textarea,select{font-family:var(--font-body)}
   #gHudLives { font-size:.75rem !important; }
   #gBtnSalir { font-size:.42rem !important; padding:2px 8px !important; }
 }
+
+/* ── ADMIN SCROLL ── */
+.admin-panel.active {
+  display: block;
+  overflow-y: auto;
+  max-height: 100%;
+}
+.panel-body {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
