@@ -514,7 +514,29 @@
 <!-- TOAST -->
 <div id="toast"></div>
 
+  <div id="projectilesC" style="position:absolute;inset:0;pointer-events:none;z-index:5"></div>
+  <img id="shipEl" alt="nave" style="position:fixed;width:68px;height:68px;transform:translate(-50%,-50%);pointer-events:none;z-index:50;filter:drop-shadow(0 0 15px #00f5d4) drop-shadow(0 0 30px rgba(255,20,147,.4));transition:filter .15s">
+  <div class="mira" id="miraEl"></div>
+  <div id="waveAnn" style="display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-display);font-size:clamp(2rem,6vw,3.5rem);font-weight:900;color:var(--c-dorado);text-shadow:0 0 60px var(--c-dorado);pointer-events:none;z-index:100;opacity:0;letter-spacing:6px;transition:opacity .4s">OLEADA 1</div>
+  <div id="coolBar" style="position:absolute;bottom:0;left:0;height:3px;background:linear-gradient(90deg,var(--c-fucsia),var(--c-turquesa));z-index:80;pointer-events:none;width:0%"></div>
+  <div class="juego-info" style="display:none">
+    <div class="hud-pill hud-score" id="hudScore">⭐ 0</div>
+    <div class="hud-pill hud-wave" id="hudWave">OLEADA 1</div>
+    <div class="hud-pill hud-lives" id="hudLives">❤️❤️❤️</div>
   </div>
+  <!-- Botón volver -->
+  <button onclick="goTo('inicio')" style="display:none;position:absolute;top:14px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.5);border:1px solid rgba(0,245,212,.4);color:var(--c-turquesa);padding:5px 16px;border-radius:20px;font-family:var(--font-display);font-size:.55rem;letter-spacing:1px;cursor:pointer;z-index:200;backdrop-filter:blur(8px)">✕ SALIR</button>
+  <div class="juego-controles">WASD / FLECHAS = MOVER · MOUSE = APUNTAR · CLICK / SPACE = DISPARAR</div>
+  <div id="touchLeft" style="position:absolute;bottom:60px;left:20px;width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,.06);border:2px solid rgba(0,245,212,.3);z-index:150;display:none;align-items:center;justify-content:center;font-size:1.3rem;color:rgba(255,255,255,.5)">◀</div>
+  <div id="touchRight" style="position:absolute;bottom:60px;right:20px;width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,.06);border:2px solid rgba(0,245,212,.3);z-index:150;display:none;align-items:center;justify-content:center;font-size:1.3rem;color:rgba(255,255,255,.5)">▶</div>
+  <div id="gameOver" style="position:absolute;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(14px);z-index:500;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px">
+    <div style="font-family:var(--font-display);font-size:2.5rem;color:var(--c-fucsia);text-shadow:0 0 40px var(--c-fucsia);letter-spacing:4px">💀 GAME OVER</div>
+    <div style="font-family:var(--font-display);font-size:.8rem;color:rgba(255,255,255,.5)">Piloto eliminado en combate</div>
+    <div id="goScore" style="font-family:var(--font-display);font-size:1.3rem;color:var(--c-dorado)">Puntuación: 0</div>
+    <div id="goWave" style="font-family:var(--font-display);font-size:.7rem;color:rgba(255,215,0,.6)"></div>
+    <button class="btn-primary" style="margin-top:8px;width:auto;padding:12px 36px" onclick="gameRestart()">▶ REINICIAR</button>
+  </div>
+</div>
 
 <!-- CHAT FLOTANTE -->
 <button id="chatBtn" onclick="toggleChat()" title="Asistente Dexi">💬<span class="chat-dot"></span></button>
