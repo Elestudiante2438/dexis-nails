@@ -101,7 +101,7 @@ function startGame(){
   // ── Game Over ──
   const over = document.createElement('div');
   over.id = 'gOver';
-  over.style.cssText = `position:absolute;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(14px);z-index:500;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;box-sizing:border-box;overflow-y:auto`;
+  over.style.cssText = `position:absolute;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(14px);z-index:500;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;box-sizing:border-box;overflow-y:auto;pointer-events:all`;
   over.innerHTML = `
     <div style="font-family:'Orbitron',sans-serif;font-size:clamp(1.2rem,6vw,2.5rem);color:${GCOL.fucsia};text-shadow:0 0 40px ${GCOL.fucsia};letter-spacing:4px;text-align:center">💀 GAME OVER</div>
     <div id="gOverScore" style="font-family:'Orbitron',sans-serif;font-size:clamp(.85rem,4vw,1.3rem);color:${GCOL.dorado};text-align:center">Puntuación: 0</div>
@@ -110,7 +110,11 @@ function startGame(){
     <button id="gBtnRestart" style="margin-top:8px;background:linear-gradient(135deg,${GCOL.fucsia},${GCOL.morado});border:none;color:white;padding:10px 32px;border-radius:30px;font-family:'Orbitron',sans-serif;font-size:clamp(.6rem,3vw,.75rem);letter-spacing:2px;cursor:pointer;pointer-events:all">▶ REINICIAR</button>
   `;
   sec.appendChild(over);
-  over.querySelector('#gBtnRestart').onclick = ()=>{ gameRestart(); };
+  const btnR = over.querySelector('#gBtnRestart');
+  btnR.style.zIndex = '9999';
+  btnR.style.position = 'relative';
+  btnR.onclick = ()=>{ gameRestart(); };
+  btnR.addEventListener('touchstart', e=>{ e.stopPropagation(); gameRestart(); },{passive:false});
 
   // ── CSS animaciones ──
   gInjectCSS();
