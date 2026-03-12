@@ -318,7 +318,7 @@ button,input,textarea,select{font-family:var(--font-body)}
 .usuarios-tabla-container{overflow-x:auto}
 
 /* ═══════════════════════════════════════ JUEGO */
-#secJuego{height:100%;width:100%;position:relative;overflow:hidden;display:none;flex-direction:column;background:#03040e}
+#secJuego{height:100%;width:100%;position:relative;overflow:hidden;display:none;flex-direction:column;background:transparent}
 .juego-info{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;z-index:100;pointer-events:none}
 .hud-pill{background:rgba(0,0,0,.5);backdrop-filter:blur(8px);border-radius:var(--r-pill);padding:6px 16px;
   font-family:var(--font-display);font-size:.75rem;border:1px solid}
