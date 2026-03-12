@@ -489,7 +489,12 @@
       </div>
 
       <!-- ══════════ JUEGO ══════════ -->
-      <div class="section" id="secJuego" style="height:100%;padding:0;overflow:hidden"></div>
+      <div class="section" id="secJuego" style="height:100%;padding:0;overflow:hidden;background:transparent">
+        <video id="juegoVideoBg" loop muted playsinline
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none">
+          <source src="Universo.mp4" type="video/mp4">
+        </video>
+      </div>
 
     </div><!-- /panel-body -->
   </div><!-- /mainPanel -->

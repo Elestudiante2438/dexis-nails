@@ -46,12 +46,34 @@ function startGame(){
   gameActive = true;
 
   const sec = gById('secJuego');
-  sec.innerHTML = '';
-  sec.style.cssText = 'display:block;cursor:none;position:relative;inset:;z-index:1;background:'+GCOL.fondo+';overflow:hidden;width:100%;height:100%;min-height:400px';
+  // Preservar el video de fondo, solo eliminar canvas y HUD anteriores
+  ['gCanvas','gHud','gOver'].forEach(id=>{ const el=document.getElementById(id); if(el) el.remove(); });
+  const oldCanvas = sec.querySelector('canvas'); if(oldCanvas) oldCanvas.remove();
+  const oldHud = sec.querySelector('#gHud'); if(oldHud) oldHud.remove();
+  sec.style.cssText = 'display:block;cursor:none;position:relative;inset:;z-index:1;background:transparent;overflow:hidden;width:100%;height:100%;min-height:400px';
 
-  // ── Canvas ──
+  // Asegurar que el video esté presente y sonando
+  let vidBg = document.getElementById('juegoVideoBg');
+  if(!vidBg){
+    vidBg = document.createElement('video');
+    vidBg.id = 'juegoVideoBg';
+    vidBg.loop = true; vidBg.playsInline = true; vidBg.muted = true;
+    vidBg.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none';
+    const src = document.createElement('source');
+    src.src = 'Universo.mp4'; src.type = 'video/mp4';
+    vidBg.appendChild(src);
+    sec.insertBefore(vidBg, sec.firstChild);
+  } else {
+    // Moverlo al inicio para que quede detrás
+    sec.insertBefore(vidBg, sec.firstChild);
+  }
+  vidBg.muted = false; vidBg.volume = 0.75;
+  vidBg.play().catch(()=>{ vidBg.muted=true; vidBg.play(); });
+
+  // ── Canvas encima del video ──
   gCanvas = document.createElement('canvas');
-  gCanvas.style.cssText = 'position:absolute;inset:0;display:block';
+  gCanvas.id = 'gCanvas';
+  gCanvas.style.cssText = 'position:absolute;inset:0;display:block;z-index:1;background:transparent';
   gCanvas.width  = sec.offsetWidth  || window.innerWidth;
   gCanvas.height = sec.offsetHeight || window.innerHeight;
   sec.appendChild(gCanvas);
@@ -105,7 +127,8 @@ function startGame(){
   gAnimId = null;
   gEnemyBullets = [];
   gTick();
-  gMusicStart();
+  // Audio viene del video — no iniciar sintetizador
+  // gMusicStart();
 }
 
 function gResize(){
@@ -673,17 +696,9 @@ function gRender(){
   if(G.shake>0) ctx.translate(rand(-G.shake,G.shake),rand(-G.shake,G.shake));
 
   // Fondo
-  ctx.fillStyle=GCOL.fondo; ctx.fillRect(0,0,W,H);
-
-  // Nebulosa animada
-  const t=G.frameCount*.002;
-  [[W*.2+Math.sin(t)*30,H*.3+Math.cos(t*.7)*20,'rgba(155,93,229,0.07)',W*.45],
-   [W*.8+Math.cos(t*.5)*25,H*.7+Math.sin(t*.8)*20,'rgba(255,20,147,0.05)',W*.4]
-  ].forEach(([nx,ny,c,nr])=>{
-    const g=ctx.createRadialGradient(nx,ny,0,nx,ny,nr);
-    g.addColorStop(0,c); g.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
-  });
+  ctx.clearRect(0,0,W,H);
+  // Tinte muy leve para legibilidad sobre el video
+  ctx.fillStyle='rgba(3,4,14,0.08)'; ctx.fillRect(0,0,W,H);
 
   // Estrellas
   G.stars.forEach(s=>{
@@ -1238,6 +1253,8 @@ function gMusicStart(){
 
 function gMusicStop(){
   gMusicOn = false;
+  const vidBg = document.getElementById('juegoVideoBg');
+  if(vidBg){ vidBg.muted=true; vidBg.pause(); }
   if(!gMusicCtx) return;
   try{
     const t = gMusicCtx.currentTime;
@@ -1259,6 +1276,8 @@ function gAddMuteBtn(master){
   let muted = false;
   btn.addEventListener('click', () => {
     muted = !muted;
+    const vidBg = document.getElementById('juegoVideoBg');
+    if(vidBg){ vidBg.muted = muted; if(!muted) vidBg.play(); }
     if(master && gMusicCtx) master.gain.linearRampToValueAtTime(muted ? 0 : 0.72, gMusicCtx.currentTime + 0.4);
     btn.textContent = muted ? '🔇 MÚSICA' : '🔊 MÚSICA';
     btn.style.color = muted ? '#ff1493' : '#9b5de5';

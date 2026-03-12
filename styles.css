@@ -548,3 +548,9 @@ button,input,textarea,select{font-family:var(--font-body)}
 /* Admin inventory extras */
 #adminInventario .admin-form-row,
 #adminVentas .admin-form-row{flex-wrap:wrap}
+
+/* ── VIDEO FONDO JUEGO ── */
+#secJuego { position: relative; }
+#juegoVideoBg { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.45;pointer-events:none; }
+#secJuego canvas { position:relative; z-index:1; }
+#gHud { z-index:10 !important; }
