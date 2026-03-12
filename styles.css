@@ -59,7 +59,8 @@ button,input,textarea,select{font-family:var(--font-body)}
 .top-logo{font-family:var(--font-script);font-size:clamp(1.6rem,4vw,2.4rem);
   background:linear-gradient(135deg,#fff,var(--c-fucsia) 55%,var(--c-dorado));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 20px rgba(255,20,147,.5));line-height:1;user-select:none}
+  filter:drop-shadow(0 0 20px rgba(255,20,147,.5));line-height:1;user-select:none;
+  margin-top:10px}
 
 /* ═══════════════════════════════════════ NAV PILLS */
 .nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;width:100%;max-width:900px}
@@ -317,7 +318,7 @@ button,input,textarea,select{font-family:var(--font-body)}
 .usuarios-tabla-container{overflow-x:auto}
 
 /* ═══════════════════════════════════════ JUEGO */
-#secJuego{height:100%;width:100%;position:relative;overflow:hidden;display:none;flex-direction:column}
+#secJuego{height:100%;width:100%;position:relative;overflow:hidden;display:none;flex-direction:column;background:#03040e}
 .juego-info{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;z-index:100;pointer-events:none}
 .hud-pill{background:rgba(0,0,0,.5);backdrop-filter:blur(8px);border-radius:var(--r-pill);padding:6px 16px;
   font-family:var(--font-display);font-size:.75rem;border:1px solid}
@@ -532,3 +533,18 @@ button,input,textarea,select{font-family:var(--font-body)}
   display:flex;align-items:center;justify-content:center}
 .chat-send:hover{transform:scale(1.1);box-shadow:0 0 16px rgba(255,20,147,.5)}
 .chat-send:disabled{opacity:.4;cursor:default;transform:none}
+
+/* ── INVENTARIO / TIENDA EXTRA ── */
+.prod-agotado-badge{
+  position:absolute;top:10px;right:10px;
+  background:rgba(255,0,70,.85);color:white;
+  font-family:var(--font-display);font-size:.55rem;letter-spacing:2px;
+  padding:3px 8px;border-radius:50px;z-index:2}
+.prod-card{position:relative}
+.prod-stock-label{
+  font-family:var(--font-display);font-size:.62rem;
+  letter-spacing:1px;margin-bottom:4px;text-align:center}
+.btn-comprar:disabled{opacity:.4;cursor:not-allowed!important}
+/* Admin inventory extras */
+#adminInventario .admin-form-row,
+#adminVentas .admin-form-row{flex-wrap:wrap}

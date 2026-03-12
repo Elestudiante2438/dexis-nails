@@ -9,12 +9,25 @@ const toast = (msg,type='success',ms=2800) => {
   const t=$('toast'); t.textContent=msg; t.className=`show ${type}`;
   setTimeout(()=>t.className='',ms);
 };
-const beep = (freq=880,dur=.1,vol=.08) => {
-  try{const a=new(window.AudioContext||window.webkitAudioContext)();
-  const o=a.createOscillator(),g=a.createGain();o.type='sine';
-  o.frequency.value=freq;g.gain.value=vol;
-  g.gain.exponentialRampToValueAtTime(.001,a.currentTime+dur);
-  o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+dur);}catch(e){}
+let _audioCtx = null;
+function _getACtx(){
+  try{
+    if(!_audioCtx || _audioCtx.state==='closed')
+      _audioCtx = new(window.AudioContext||window.webkitAudioContext)();
+    if(_audioCtx.state==='suspended') _audioCtx.resume();
+    return _audioCtx;
+  }catch(e){ return null; }
+}
+const beep = (freq=880, dur=.1, vol=.08) => {
+  try{
+    const a = _getACtx(); if(!a) return;
+    const o=a.createOscillator(), g=a.createGain();
+    o.type='sine'; o.frequency.value=freq;
+    g.gain.setValueAtTime(vol, a.currentTime);
+    g.gain.exponentialRampToValueAtTime(.001, a.currentTime+dur);
+    o.connect(g); g.connect(a.destination);
+    o.start(); o.stop(a.currentTime+dur);
+  }catch(e){}
 };
 const LS = {
   get:(k,d=[])=>{try{return JSON.parse(localStorage.getItem('dexys_'+k))||d;}catch{return d;}},
@@ -39,6 +52,28 @@ function getAdminUsers(){
   const extra=LS.get('adminUsers',[]);
   return [...ADMIN_DEFAULT,...extra];
 }
+
+// ── INVENTARIO ──
+function getInventario(){
+  const def = [
+    {id:1, nombre:'Agua de Oriente',    tipo:'colonia',  precio:45900, stock:10, svg:'colonia1', desc:'Colonia fresca con notas cítricas y un toque de azahar.', notas:['Limón','Naranja','Azahar'],   foto:''},
+    {id:2, nombre:'Brisas de Dubai',    tipo:'colonia',  precio:49900, stock:8,  svg:'colonia2', desc:'Colonia fresca con notas marinas y fondo de almizcle.', notas:['Marina','Almizcle','Madera'], foto:''},
+    {id:3, nombre:'Flor de Azahar',     tipo:'colonia',  precio:42500, stock:12, svg:'colonia3', desc:'Colonia floral suave con notas de azahar y neroli.',   notas:['Azahar','Neroli','Miel'],     foto:''},
+    {id:4, nombre:'La Bestia Negra',    tipo:'perfume',  precio:89900, stock:5,  svg:'perfume1', desc:'Perfume intenso y profundo con notas amaderadas.',     notas:['Cuero','Almizcle','Ámbar'],  foto:''},
+    {id:5, nombre:'Oud Silver',         tipo:'perfume',  precio:95000, stock:6,  svg:'perfume2', desc:'Frescura plateada con notas cítricas y oud intenso.',  notas:['Bergamota','Oud','Azafrán'], foto:''},
+    {id:6, nombre:'Rose Noir',          tipo:'perfume',  precio:92500, stock:7,  svg:'perfume3', desc:'Rosa oscura fusionada con pachulí y especias.',         notas:['Rosa','Pachulí','Canela'],   foto:''},
+    {id:7, nombre:'Amber Gold',         tipo:'perfume',  precio:87900, stock:9,  svg:'perfume4', desc:'Ámbar dorado con vainilla y resinas. Cálido y dulce.', notas:['Ámbar','Vainilla','Benjuí'],foto:''},
+  ];
+  const saved = LS.get('inventario', null);
+  return saved || def;
+}
+function setInventario(inv){ LS.set('inventario', inv); }
+function ajustarStock(nombre, delta){
+  const inv = getInventario();
+  const p = inv.find(x=>x.nombre===nombre);
+  if(p){ p.stock = Math.max(0, (p.stock||0) + delta); setInventario(inv); }
+}
+
 function getPuntos(cedula){
   const r=getReservas().filter(x=>x.cedula===cedula).length*10;
   const c=getCompras().filter(x=>x.cedula===cedula).reduce((s,x)=>s+Math.floor((x.precio||0)/10000)*5,0);
@@ -129,14 +164,27 @@ function goTo(sec){
   if(sec==='dashboard') renderDashboard();
   if(sec==='admin') renderAdmin();
   if(sec==='juego'){
-    // Show fullscreen game overlay
-    $('secJuego').style.display='block';
-    document.body.style.overflow='hidden';
+    $('panelBody').style.padding  = '0';
+    $('panelBody').style.overflow = 'hidden';
+    $('panelBody').style.height   = '100%';
+    $('mainPanel').style.height   = 'calc(100vh - 120px)';
+    $('panelHeader').style.display = 'none';
+    const sj = $('secJuego');
+    sj.style.display = 'flex';
+    sj.classList.add('active');
+    document.body.style.overflow = 'hidden';
     requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(startGame)));
   } else {
-    $('secJuego').style.display='none';
-    document.body.style.overflow='';
-    gameActive=false;
+    $('panelBody').style.padding  = '20px';
+    $('panelBody').style.overflow = '';
+    $('panelBody').style.height   = '';
+    $('mainPanel').style.height   = '';
+    $('panelHeader').style.display = '';
+    const sj = $('secJuego');
+    sj.style.display = 'none';
+    sj.classList.remove('active');
+    document.body.style.overflow = '';
+    gameActive = false;
   }
 }
 
@@ -447,15 +495,17 @@ const PERFUMES=[
 ];
 
 function renderTienda(){
-  // Alerta sesión
   $('tiendaSesionAlert').style.display = clienteActual?'none':'block';
   $('tiendaClienteBadge').style.display = clienteActual?'block':'none';
   if(clienteActual){
     $('tiendaNombre').textContent=clienteActual.nombre;
     $('tiendaPuntos').textContent=`⭐ ${getPuntos(clienteActual.cedula)} pts`;
   }
-  renderProductos('gridColonias',COLONIAS,'var(--c-turquesa)','colonia');
-  renderProductos('gridPerfumes',PERFUMES,'var(--c-fucsia)','perfume');
+  const inv = getInventario();
+  const colonias = inv.filter(x=>x.tipo==='colonia');
+  const perfumes = inv.filter(x=>x.tipo==='perfume');
+  renderProductosInv('gridColonias', colonias, 'var(--c-turquesa)', 'colonia');
+  renderProductosInv('gridPerfumes', perfumes, 'var(--c-fucsia)',   'perfume');
 }
 
 const BOTTLE_SVGS = {
@@ -672,6 +722,41 @@ const BOTTLE_SVGS = {
   </svg>`,
 };
 
+function renderProductosInv(gridId,lista,color,tipo){
+  const g=$(gridId); g.innerHTML='';
+  lista.forEach(p=>{
+    const d=document.createElement('div');
+    d.className='prod-card'; d.style.setProperty('--prod-color',color);
+    const sinStock = (p.stock||0)<=0;
+    let imgHTML = '';
+    if(p.foto){
+      imgHTML = `<div class="prod-bottle"><img src="${p.foto}" alt="${p.nombre}" style="width:80px;height:120px;object-fit:contain;border-radius:8px;"></div>`;
+    } else if(p.svg && BOTTLE_SVGS[p.svg]){
+      imgHTML = `<div class="prod-bottle">${BOTTLE_SVGS[p.svg]}</div>`;
+    } else {
+      imgHTML = `<span class="prod-emoji">🧴</span>`;
+    }
+    const notasArr = Array.isArray(p.notas) ? p.notas : (p.notas||'').split(',').map(x=>x.trim()).filter(Boolean);
+    d.innerHTML=`
+      <span class="prod-tipo-badge" style="color:${color};border-color:${color}">${tipo.toUpperCase()}</span>
+      ${sinStock?'<span class="prod-agotado-badge">AGOTADO</span>':''}
+      ${imgHTML}
+      <div class="prod-nombre">${p.nombre}</div>
+      <div class="prod-desc">${p.desc||''}</div>
+      <div class="prod-notas">${notasArr.map(n=>`<span class="prod-nota">${n}</span>`).join('')}</div>
+      <div class="prod-stock-label" style="font-size:.65rem;color:${sinStock?'#ff4466':'rgba(0,245,212,.7)'};font-family:var(--font-display);margin-bottom:4px">
+        ${sinStock?'Sin stock':'📦 Stock: '+p.stock}
+      </div>
+      <div class="prod-footer">
+        <span class="prod-precio">$${(p.precio||0).toLocaleString()}</span>
+        <button class="btn-comprar" ${sinStock?'disabled style="opacity:.4;cursor:not-allowed"':''} onclick="${sinStock?'':'comprar(\''+p.nombre+'\','+p.precio+',\''+tipo+'\')'}">
+          ${sinStock?'AGOTADO':'COMPRAR'}
+        </button>
+      </div>`;
+    g.appendChild(d);
+  });
+}
+
 function renderProductos(gridId,lista,color,tipo){
   const g=$(gridId); g.innerHTML='';
   lista.forEach(p=>{
@@ -696,12 +781,22 @@ function renderProductos(gridId,lista,color,tipo){
 
 function comprar(nombre,precio,tipo){
   if(!clienteActual){goTo('reservas');toast('Iniciá sesión para comprar','error');return;}
+  // Verificar stock
+  const inv = getInventario();
+  const prod = inv.find(x=>x.nombre===nombre);
+  if(prod && prod.stock<=0){toast('❌ Sin stock disponible','error');beep(220,.15);return;}
+  // Registrar compra
   const compras=getCompras();
   compras.push({id:Date.now(),cedula:clienteActual.cedula,clienteNombre:clienteActual.nombre,
     producto:nombre,tipo,precio,fecha:new Date().toISOString()});
   LS.set('compras',compras);
+  // Descontar stock
+  ajustarStock(nombre, -1);
+  // Actualizar puntos en pantalla
   const pts=getPuntos(clienteActual.cedula);
-  $('tiendaPuntos').textContent=`⭐ ${pts} pts`;
+  if($('tiendaPuntos')) $('tiendaPuntos').textContent=`⭐ ${pts} pts`;
+  // Re-renderizar tienda para mostrar stock actualizado
+  renderTienda();
   toast(`✅ ¡Compra exitosa! +${Math.floor(precio/10000)*5} pts`);
   beep(880,.15);
 }
@@ -855,7 +950,7 @@ function adminTab(el,panel){
   el.classList.add('active');
   document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));
   $('admin'+panel.charAt(0).toUpperCase()+panel.slice(1)).classList.add('active');
-  const loaders={stats:adminLoadStats,reservas:adminLoadReservas,clientes:adminLoadClientes,profesionales:adminLoadProf,bloqueos:adminLoadBloqueos,usuarios:adminLoadUsers};
+  const loaders={stats:adminLoadStats,reservas:adminLoadReservas,clientes:adminLoadClientes,profesionales:adminLoadProf,bloqueos:adminLoadBloqueos,usuarios:adminLoadUsers,inventario:adminLoadInventario,ventas:adminLoadVentas};
   loaders[panel]?.();
 }
 
@@ -864,9 +959,185 @@ function renderAdmin(){
   $('adminUser').textContent=adminActual.usuario;
   adminLoadStats();
   adminLoadProf();
-  // Llenar select profesionales en bloqueos
   const sel=$('bloquearProf'); sel.innerHTML='<option value="todos">TODAS</option>';
   getProfesionales().forEach(p=>sel.innerHTML+=`<option value="${p.id}">${p.nombre}</option>`);
+}
+
+
+// ── ADMIN INVENTARIO ──
+function adminLoadInventario(){
+  const cont = $('adminInventario'); if(!cont) return;
+  const inv = getInventario();
+  const totalStock = inv.reduce((s,p)=>s+(p.stock||0),0);
+  const bajoStock = inv.filter(p=>(p.stock||0)<=3);
+  cont.innerHTML = `
+    <div class="stat-grid" style="margin-bottom:16px">
+      <div class="stat-card"><h4>PRODUCTOS</h4><div class="stat-num">${inv.length}</div><div class="stat-sub">en tienda</div></div>
+      <div class="stat-card"><h4>STOCK TOTAL</h4><div class="stat-num">${totalStock}</div><div class="stat-sub">unidades</div></div>
+      <div class="stat-card"><h4>BAJO STOCK</h4><div class="stat-num" style="color:${bajoStock.length?'#ff4466':'#00f5d4'}">${bajoStock.length}</div><div class="stat-sub">≤ 3 unidades</div></div>
+    </div>
+    <div class="admin-section-title">PRODUCTOS EN TIENDA</div>
+    <div style="overflow-x:auto">
+    <table class="admin-table">
+      <thead><tr><th>FOTO/SVG</th><th>NOMBRE</th><th>TIPO</th><th>PRECIO</th><th>STOCK</th><th>ACCIONES</th></tr></thead>
+      <tbody id="invTableBody"></tbody>
+    </table>
+    </div>
+    <div class="admin-section-title" style="margin-top:20px">➕ AGREGAR PRODUCTO</div>
+    <div class="admin-form-row" style="flex-wrap:wrap;gap:8px">
+      <div class="form-field"><label>NOMBRE</label><input class="form-input" id="invNombre" type="text" placeholder="Nombre del producto"></div>
+      <div class="form-field"><label>TIPO</label>
+        <select class="form-input" id="invTipo" style="background:rgba(255,255,255,.06);color:white">
+          <option value="colonia">Colonia</option>
+          <option value="perfume">Perfume</option>
+          <option value="servicio">Servicio</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+      <div class="form-field"><label>PRECIO</label><input class="form-input" id="invPrecio" type="number" placeholder="0"></div>
+      <div class="form-field"><label>STOCK INICIAL</label><input class="form-input" id="invStock" type="number" placeholder="0" value="0"></div>
+      <div class="form-field"><label>DESCRIPCIÓN</label><input class="form-input" id="invDesc" type="text" placeholder="Descripción breve"></div>
+      <div class="form-field"><label>NOTAS (separadas por coma)</label><input class="form-input" id="invNotas" type="text" placeholder="Nota1, Nota2, Nota3"></div>
+      <div class="form-field" style="min-width:200px"><label>FOTO (URL o subir)</label>
+        <input class="form-input" id="invFotoUrl" type="text" placeholder="https://... o dejar vacío">
+        <input type="file" id="invFotoFile" accept="image/*" style="margin-top:6px;color:rgba(255,255,255,.6);font-size:.7rem" onchange="invLoadFoto(this)">
+        <img id="invFotoPreview" style="display:none;width:60px;height:80px;object-fit:contain;margin-top:6px;border-radius:6px;border:1px solid rgba(255,255,255,.15)">
+      </div>
+      <button class="btn-primary" style="width:auto;padding:10px 20px;align-self:flex-end" onclick="adminAddProducto()">AGREGAR</button>
+    </div>`;
+  adminRenderInvTable(inv);
+}
+
+function invLoadFoto(input){
+  const file = input.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    $('invFotoPreview').src = ev.target.result;
+    $('invFotoPreview').style.display = 'block';
+    $('invFotoUrl').value = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function adminRenderInvTable(inv){
+  const tbody = $('invTableBody'); if(!tbody) return;
+  tbody.innerHTML = '';
+  inv.forEach(p=>{
+    const sinStock = (p.stock||0)<=0;
+    const bajoStock = (p.stock||0)<=3 && (p.stock||0)>0;
+    const stockColor = sinStock?'#ff4466':bajoStock?'#ffd700':'#00f5d4';
+    const imgHTML = p.foto
+      ? `<img src="${p.foto}" style="width:36px;height:48px;object-fit:contain;border-radius:4px">`
+      : (p.svg&&BOTTLE_SVGS[p.svg] ? `<div style="width:36px;height:48px;overflow:hidden">${BOTTLE_SVGS[p.svg]}</div>` : '🧴');
+    tbody.innerHTML += `<tr>
+      <td style="text-align:center">${imgHTML}</td>
+      <td style="font-weight:600">${p.nombre}</td>
+      <td><span class="badge-ok" style="background:rgba(0,245,212,.1)">${p.tipo}</span></td>
+      <td>$${(p.precio||0).toLocaleString()}</td>
+      <td>
+        <span style="color:${stockColor};font-family:var(--font-display);font-size:.7rem">${p.stock||0}</span>
+        <div style="display:flex;gap:4px;margin-top:4px">
+          <button class="admin-btn" onclick="adminAjustarStock(${p.id},1)" title="Sumar 1">+1</button>
+          <button class="admin-btn admin-btn-red" onclick="adminAjustarStock(${p.id},-1)" title="Restar 1">-1</button>
+          <input type="number" id="stockSet_${p.id}" placeholder="N" style="width:44px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:white;border-radius:6px;padding:3px 5px;font-size:.65rem">
+          <button class="admin-btn" onclick="adminSetStock(${p.id})" title="Poner exacto">SET</button>
+        </div>
+      </td>
+      <td>
+        <button class="admin-btn admin-btn-red" onclick="adminDelProducto(${p.id})">🗑</button>
+      </td>
+    </tr>`;
+  });
+}
+
+function adminAjustarStock(id, delta){
+  const inv = getInventario();
+  const p = inv.find(x=>x.id===id);
+  if(p){ p.stock = Math.max(0,(p.stock||0)+delta); setInventario(inv); adminRenderInvTable(inv); adminLoadStats(); toast(`Stock ${p.nombre}: ${p.stock}`); }
+}
+
+function adminSetStock(id){
+  const val = parseInt($('stockSet_'+id)?.value);
+  if(isNaN(val)||val<0){toast('Ingresá un número válido','error');return;}
+  const inv = getInventario();
+  const p = inv.find(x=>x.id===id);
+  if(p){ p.stock=val; setInventario(inv); adminRenderInvTable(inv); adminLoadStats(); toast(`Stock ${p.nombre}: ${p.stock}`); }
+}
+
+function adminDelProducto(id){
+  if(!confirm('¿Eliminar este producto?')) return;
+  let inv = getInventario().filter(x=>x.id!==id);
+  setInventario(inv); adminLoadInventario(); toast('Producto eliminado');
+}
+
+function adminAddProducto(){
+  const nombre = $('invNombre').value.trim();
+  const tipo   = $('invTipo').value;
+  const precio = parseInt($('invPrecio').value)||0;
+  const stock  = parseInt($('invStock').value)||0;
+  const desc   = $('invDesc').value.trim();
+  const notas  = $('invNotas').value.split(',').map(x=>x.trim()).filter(Boolean);
+  const foto   = $('invFotoUrl').value.trim();
+  if(!nombre) return toast('Ingresá el nombre del producto','error');
+  const inv = getInventario();
+  const newId = Math.max(0,...inv.map(x=>x.id))+1;
+  inv.push({id:newId,nombre,tipo,precio,stock,desc,notas,foto,svg:''});
+  setInventario(inv);
+  $('invNombre').value='';$('invPrecio').value='';$('invStock').value='0';$('invDesc').value='';$('invNotas').value='';$('invFotoUrl').value='';
+  $('invFotoPreview').style.display='none';
+  adminLoadInventario(); toast('✅ Producto agregado'); renderTienda();
+}
+
+// ── ADMIN VENTAS ──
+function adminLoadVentas(){
+  const cont = $('adminVentas'); if(!cont) return;
+  const compras = getCompras().sort((a,b)=>b.fecha.localeCompare(a.fecha));
+  const totalVentas = compras.reduce((s,c)=>s+(c.precio||0),0);
+  const hoy = new Date().toISOString().split('T')[0];
+  const ventasHoy = compras.filter(c=>c.fecha.startsWith(hoy)).reduce((s,c)=>s+(c.precio||0),0);
+  // Productos más vendidos
+  const vendMap = new Map();
+  compras.forEach(c=>{ vendMap.set(c.producto,(vendMap.get(c.producto)||0)+1); });
+  const topVendidos = [...vendMap.entries()].sort((a,b)=>b[1]-a[1]).slice(0,5);
+
+  cont.innerHTML = `
+    <div class="stat-grid" style="margin-bottom:16px">
+      <div class="stat-card"><h4>TOTAL VENTAS</h4><div class="stat-num">$${totalVentas.toLocaleString()}</div><div class="stat-sub">histórico</div></div>
+      <div class="stat-card"><h4>VENTAS HOY</h4><div class="stat-num">$${ventasHoy.toLocaleString()}</div><div class="stat-sub">${compras.filter(c=>c.fecha.startsWith(hoy)).length} compras</div></div>
+      <div class="stat-card"><h4>COMPRAS TOTALES</h4><div class="stat-num">${compras.length}</div><div class="stat-sub">transacciones</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+      <div>
+        <div class="admin-section-title">🏆 MÁS VENDIDOS</div>
+        <table class="admin-table"><thead><tr><th>PRODUCTO</th><th>UNIDADES</th></tr></thead><tbody>
+          ${topVendidos.map(([nombre,qty])=>`<tr><td>${nombre}</td><td style="color:var(--c-dorado);font-family:var(--font-display)">${qty}</td></tr>`).join('')||'<tr><td colspan="2" style="text-align:center;color:rgba(255,255,255,.3)">Sin ventas</td></tr>'}
+        </tbody></table>
+      </div>
+      <div>
+        <div class="admin-section-title">📦 STOCK ACTUAL</div>
+        <table class="admin-table"><thead><tr><th>PRODUCTO</th><th>STOCK</th></tr></thead><tbody>
+          ${getInventario().map(p=>{
+            const sc=(p.stock||0)<=0?'#ff4466':(p.stock||0)<=3?'#ffd700':'#00f5d4';
+            return `<tr><td>${p.nombre}</td><td style="color:${sc};font-family:var(--font-display)">${p.stock||0}</td></tr>`;
+          }).join('')}
+        </tbody></table>
+      </div>
+    </div>
+    <div class="admin-section-title">HISTORIAL DE VENTAS</div>
+    <div style="overflow-x:auto">
+    <table class="admin-table">
+      <thead><tr><th>FECHA</th><th>CLIENTE</th><th>PRODUCTO</th><th>TIPO</th><th>PRECIO</th></tr></thead>
+      <tbody>
+        ${compras.slice(0,50).map(c=>`<tr>
+          <td>${new Date(c.fecha).toLocaleDateString('es-CO')}</td>
+          <td>${c.clienteNombre||'—'}</td>
+          <td>${c.producto}</td>
+          <td><span class="badge-ok" style="background:rgba(0,245,212,.08)">${c.tipo||'—'}</span></td>
+          <td style="color:var(--c-dorado)">$${(c.precio||0).toLocaleString()}</td>
+        </tr>`).join('')||'<tr><td colspan="5" style="text-align:center;color:rgba(255,255,255,.3);padding:20px">Sin ventas registradas</td></tr>'}
+      </tbody>
+    </table>
+    </div>`;
 }
 
 function adminLoadStats(){
@@ -879,6 +1150,7 @@ function adminLoadStats(){
     <div class="stat-card"><h4>RESERVAS TOTALES</h4><div class="stat-num">${reservas.length}</div><div class="stat-sub">📅 ${resHoy} hoy</div></div>
     <div class="stat-card"><h4>CLIENTES REGISTRADOS</h4><div class="stat-num">${clientes.length}</div><div class="stat-sub">👤 activos</div></div>
     <div class="stat-card"><h4>VENTAS TIENDA</h4><div class="stat-num">$${ventas.toLocaleString()}</div><div class="stat-sub">🛍️ ${compras.length} compras</div></div>
+    <div class="stat-card" onclick="adminTab(document.querySelector('[data-atab=ventas]'),'ventas')" style="cursor:pointer"><h4>STOCK TOTAL</h4><div class="stat-num">${getInventario().reduce((s,p)=>s+(p.stock||0),0)}</div><div class="stat-sub">📦 ${getInventario().filter(p=>(p.stock||0)<=3).length} bajo stock</div></div>
     <div class="stat-card"><h4>PROFESIONALES ACTIVAS</h4><div class="stat-num">${profs.filter(p=>p.activa).length}/${profs.length}</div><div class="stat-sub">👩 disponibles</div></div>
     <div class="stat-card"><h4>TOP PROFESIONAL</h4><div class="stat-num" style="font-size:1.4rem">${adminTopProf(reservas)}</div><div class="stat-sub">más reservas</div></div>
     <div class="stat-card"><h4>PUNTOS EN CIRCULACIÓN</h4><div class="stat-num">${clientes.reduce((s,c)=>s+getPuntos(c.cedula),0)}</div><div class="stat-sub">⭐ total sistema</div></div>`;

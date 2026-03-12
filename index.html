@@ -429,6 +429,8 @@
             <div class="admin-tab" onclick="adminTab(this,'profesionales')">👩 PROFESIONALES</div>
             <div class="admin-tab" onclick="adminTab(this,'bloqueos')">🔒 BLOQUEOS</div>
             <div class="admin-tab" onclick="adminTab(this,'usuarios')">🔑 USUARIOS ADMIN</div>
+            <div class="admin-tab" data-atab="inventario" onclick="adminTab(this,'inventario')">📦 INVENTARIO</div>
+            <div class="admin-tab" data-atab="ventas"     onclick="adminTab(this,'ventas')">💰 VENTAS</div>
           </div>
           <!-- STATS -->
           <div class="admin-panel active" id="adminStats">
@@ -477,8 +479,17 @@
             <div class="admin-section-title">USUARIOS DEL SISTEMA</div>
             <table class="admin-table"><thead><tr><th>USUARIO</th><th>ROL</th><th>TIPO</th><th>ACCIÓN</th></tr></thead><tbody id="adminUsrTable"></tbody></table>
           </div>
+
+          <!-- INVENTARIO -->
+          <div class="admin-panel" id="adminInventario"></div>
+
+          <!-- VENTAS -->
+          <div class="admin-panel" id="adminVentas"></div>
         </div>
       </div>
+
+      <!-- ══════════ JUEGO ══════════ -->
+      <div class="section" id="secJuego" style="height:100%;padding:0;overflow:hidden"></div>
 
     </div><!-- /panel-body -->
   </div><!-- /mainPanel -->
@@ -498,21 +509,18 @@
 <!-- TOAST -->
 <div id="toast"></div>
 
-<!-- JUEGO ARCADIA — pantalla completa sobre todo -->
-<div id="secJuego" style="display:none;position:fixed;inset:0;z-index:5000;background:#03040e;overflow:hidden">
-  <div id="trailC" style="position:absolute;inset:0;pointer-events:none;z-index:5"></div>
   <div id="projectilesC" style="position:absolute;inset:0;pointer-events:none;z-index:5"></div>
   <img id="shipEl" alt="nave" style="position:fixed;width:68px;height:68px;transform:translate(-50%,-50%);pointer-events:none;z-index:50;filter:drop-shadow(0 0 15px #00f5d4) drop-shadow(0 0 30px rgba(255,20,147,.4));transition:filter .15s">
   <div class="mira" id="miraEl"></div>
-  <div id="waveAnn" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-display);font-size:clamp(2rem,6vw,3.5rem);font-weight:900;color:var(--c-dorado);text-shadow:0 0 60px var(--c-dorado);pointer-events:none;z-index:100;opacity:0;letter-spacing:6px;transition:opacity .4s">OLEADA 1</div>
+  <div id="waveAnn" style="display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-display);font-size:clamp(2rem,6vw,3.5rem);font-weight:900;color:var(--c-dorado);text-shadow:0 0 60px var(--c-dorado);pointer-events:none;z-index:100;opacity:0;letter-spacing:6px;transition:opacity .4s">OLEADA 1</div>
   <div id="coolBar" style="position:absolute;bottom:0;left:0;height:3px;background:linear-gradient(90deg,var(--c-fucsia),var(--c-turquesa));z-index:80;pointer-events:none;width:0%"></div>
-  <div class="juego-info">
+  <div class="juego-info" style="display:none">
     <div class="hud-pill hud-score" id="hudScore">⭐ 0</div>
     <div class="hud-pill hud-wave" id="hudWave">OLEADA 1</div>
     <div class="hud-pill hud-lives" id="hudLives">❤️❤️❤️</div>
   </div>
   <!-- Botón volver -->
-  <button onclick="goTo('inicio')" style="position:absolute;top:14px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.5);border:1px solid rgba(0,245,212,.4);color:var(--c-turquesa);padding:5px 16px;border-radius:20px;font-family:var(--font-display);font-size:.55rem;letter-spacing:1px;cursor:pointer;z-index:200;backdrop-filter:blur(8px)">✕ SALIR</button>
+  <button onclick="goTo('inicio')" style="display:none;position:absolute;top:14px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.5);border:1px solid rgba(0,245,212,.4);color:var(--c-turquesa);padding:5px 16px;border-radius:20px;font-family:var(--font-display);font-size:.55rem;letter-spacing:1px;cursor:pointer;z-index:200;backdrop-filter:blur(8px)">✕ SALIR</button>
   <div class="juego-controles">WASD / FLECHAS = MOVER · MOUSE = APUNTAR · CLICK / SPACE = DISPARAR</div>
   <div id="touchLeft" style="position:absolute;bottom:60px;left:20px;width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,.06);border:2px solid rgba(0,245,212,.3);z-index:150;display:none;align-items:center;justify-content:center;font-size:1.3rem;color:rgba(255,255,255,.5)">◀</div>
   <div id="touchRight" style="position:absolute;bottom:60px;right:20px;width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,.06);border:2px solid rgba(0,245,212,.3);z-index:150;display:none;align-items:center;justify-content:center;font-size:1.3rem;color:rgba(255,255,255,.5)">▶</div>
