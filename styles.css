@@ -554,3 +554,16 @@ button,input,textarea,select{font-family:var(--font-body)}
 #juegoVideoBg { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.45;pointer-events:none; }
 #secJuego canvas { position:relative; z-index:1; }
 #gHud { z-index:10 !important; }
+
+/* ── JUEGO MÓVIL ── */
+@media(max-width:600px){
+  #secJuego { background:transparent !important; }
+  #juegoVideoBg { object-fit:cover; }
+  /* Score popup no se sale */
+  #gHud { overflow:hidden; }
+  /* HUD más pequeño en móvil */
+  #gHudScore { font-size:.6rem !important; }
+  #gHudWave  { font-size:.55rem !important; }
+  #gHudLives { font-size:.75rem !important; }
+  #gBtnSalir { font-size:.42rem !important; padding:2px 8px !important; }
+}

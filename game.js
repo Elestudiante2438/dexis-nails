@@ -346,21 +346,44 @@ function gBindInput(){
   },{passive:true});
   sec.addEventListener('mousedown', e=>{ if(e.button===0) gShoot(); });
   sec.addEventListener('contextmenu', e=>e.preventDefault());
+  // ── TOUCH MÓVIL: joystick virtual ──
+  let touchStartX=0, touchStartY=0, touchActive=false;
   sec.addEventListener('touchstart', e=>{
+    e.preventDefault();
     if(e.touches.length){
       const r=gCanvas.getBoundingClientRect();
-      G.mouse.x=e.touches[0].clientX-r.left;
-      G.mouse.y=e.touches[0].clientY-r.top;
+      touchStartX=e.touches[0].clientX-r.left;
+      touchStartY=e.touches[0].clientY-r.top;
+      touchActive=true;
+      // La nave apunta hacia donde se toca
+      G.mouse.x=touchStartX;
+      G.mouse.y=touchStartY;
       gShoot();
     }
-  },{passive:true});
+  },{passive:false});
   sec.addEventListener('touchmove', e=>{
-    if(e.touches.length){
+    e.preventDefault();
+    if(e.touches.length && touchActive){
       const r=gCanvas.getBoundingClientRect();
-      G.mouse.x=e.touches[0].clientX-r.left;
-      G.mouse.y=e.touches[0].clientY-r.top;
+      const tx=e.touches[0].clientX-r.left;
+      const ty=e.touches[0].clientY-r.top;
+      G.mouse.x=tx; G.mouse.y=ty;
+      // Calcular dirección del desliz para mover la nave
+      const ddx=tx-touchStartX, ddy=ty-touchStartY;
+      const dist=Math.hypot(ddx,ddy);
+      if(dist>12){
+        G.touchDir.x = ddx/dist;
+        G.touchDir.y = ddy/dist;
+      } else {
+        G.touchDir.x=0; G.touchDir.y=0;
+      }
     }
-  },{passive:true});
+  },{passive:false});
+  sec.addEventListener('touchend', e=>{
+    e.preventDefault();
+    touchActive=false;
+    G.touchDir.x=0; G.touchDir.y=0;
+  },{passive:false});
   document.addEventListener('keydown', gKeyDown);
   document.addEventListener('keyup',   gKeyUp);
 }
@@ -973,7 +996,8 @@ function gUpdatePowerIcons(){
 }
 function gScorePop(x,y,pts){
   const el=document.createElement('div');
-  el.style.cssText=`position:absolute;left:${x}px;top:${y}px;font-family:'Orbitron',sans-serif;font-size:.75rem;color:${GCOL.dorado};text-shadow:0 0 10px ${GCOL.dorado};pointer-events:none;z-index:20;transform:translate(-50%,-50%);animation:gScorePop .9s forwards`;
+  const cx=Math.min(Math.max(x,40),G.W-40), cy=Math.min(Math.max(y,40),G.H-40);
+  el.style.cssText=`position:absolute;left:${cx}px;top:${cy}px;font-family:'Orbitron',sans-serif;font-size:.7rem;color:${GCOL.dorado};text-shadow:0 0 10px ${GCOL.dorado};pointer-events:none;z-index:20;transform:translate(-50%,-50%);animation:gScorePop .9s forwards`;
   el.textContent='+'+pts;
   gById('secJuego').appendChild(el);
   setTimeout(()=>el.remove(),900);
