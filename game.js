@@ -110,7 +110,7 @@ function startGame(){
     <button id="gBtnRestart" style="margin-top:8px;background:linear-gradient(135deg,${GCOL.fucsia},${GCOL.morado});border:none;color:white;padding:10px 32px;border-radius:30px;font-family:'Orbitron',sans-serif;font-size:clamp(.6rem,3vw,.75rem);letter-spacing:2px;cursor:pointer;pointer-events:all">▶ REINICIAR</button>
   `;
   sec.appendChild(over);
-  over.querySelector('#gBtnRestart').addEventListener('click', gameRestart);
+  over.querySelector('#gBtnRestart').onclick = ()=>{ gameRestart(); };
 
   // ── CSS animaciones ──
   gInjectCSS();
@@ -1057,7 +1057,8 @@ function gameRestart(){
   gMusicStop();
   gUnbindInput();
   gEnemyBullets=[];
-  startGame();
+  if(typeof G!=='undefined') G.touchTarget=null;
+  setTimeout(()=>startGame(), 50);
 }
 
 // ── CSS ─────────────────────────────────────────────
