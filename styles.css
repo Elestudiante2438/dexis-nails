@@ -594,3 +594,16 @@ button,input,textarea,select{font-family:var(--font-body)}
 #secAdmin ::-webkit-scrollbar { width: 6px; }
 #secAdmin ::-webkit-scrollbar-track { background: rgba(255,255,255,.05); border-radius: 3px; }
 #secAdmin ::-webkit-scrollbar-thumb { background: rgba(0,245,212,.4); border-radius: 3px; }
+
+/* ── ADMIN SCROLL DEFINITIVO ── */
+#secAdmin { display:flex; flex-direction:column; height:100%; overflow:hidden; }
+#secAdmin .panel-body {
+  flex: 1;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 40px !important;
+}
+#secAdmin .admin-panel.active {
+  overflow-y: visible;
+  padding-bottom: 20px;
+}
