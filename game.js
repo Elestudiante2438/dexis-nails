@@ -101,13 +101,13 @@ function startGame(){
   // ── Game Over ──
   const over = document.createElement('div');
   over.id = 'gOver';
-  over.style.cssText = `position:absolute;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(14px);z-index:500;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px`;
+  over.style.cssText = `position:absolute;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(14px);z-index:500;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;box-sizing:border-box;overflow-y:auto`;
   over.innerHTML = `
-    <div style="font-family:'Orbitron',sans-serif;font-size:2.5rem;color:${GCOL.fucsia};text-shadow:0 0 40px ${GCOL.fucsia};letter-spacing:4px">💀 GAME OVER</div>
-    <div id="gOverScore" style="font-family:'Orbitron',sans-serif;font-size:1.3rem;color:${GCOL.dorado}">Puntuación: 0</div>
-    <div id="gOverWave"  style="font-family:'Orbitron',sans-serif;font-size:.7rem;color:rgba(255,215,0,.6)"></div>
-    <div id="gLeaderboard" style="margin-top:8px;width:280px"></div>
-    <button id="gBtnRestart" style="margin-top:8px;background:linear-gradient(135deg,${GCOL.fucsia},${GCOL.morado});border:none;color:white;padding:12px 36px;border-radius:30px;font-family:'Orbitron',sans-serif;font-size:.75rem;letter-spacing:2px;cursor:pointer;pointer-events:all">▶ REINICIAR</button>
+    <div style="font-family:'Orbitron',sans-serif;font-size:clamp(1.2rem,6vw,2.5rem);color:${GCOL.fucsia};text-shadow:0 0 40px ${GCOL.fucsia};letter-spacing:4px;text-align:center">💀 GAME OVER</div>
+    <div id="gOverScore" style="font-family:'Orbitron',sans-serif;font-size:clamp(.85rem,4vw,1.3rem);color:${GCOL.dorado};text-align:center">Puntuación: 0</div>
+    <div id="gOverWave"  style="font-family:'Orbitron',sans-serif;font-size:clamp(.55rem,2.5vw,.7rem);color:rgba(255,215,0,.6);text-align:center"></div>
+    <div id="gLeaderboard" style="margin-top:8px;width:min(280px,90%)"></div>
+    <button id="gBtnRestart" style="margin-top:8px;background:linear-gradient(135deg,${GCOL.fucsia},${GCOL.morado});border:none;color:white;padding:10px 32px;border-radius:30px;font-family:'Orbitron',sans-serif;font-size:clamp(.6rem,3vw,.75rem);letter-spacing:2px;cursor:pointer;pointer-events:all">▶ REINICIAR</button>
   `;
   sec.appendChild(over);
   over.querySelector('#gBtnRestart').addEventListener('click', gameRestart);
@@ -346,44 +346,21 @@ function gBindInput(){
   },{passive:true});
   sec.addEventListener('mousedown', e=>{ if(e.button===0) gShoot(); });
   sec.addEventListener('contextmenu', e=>e.preventDefault());
-  // ── TOUCH MÓVIL: joystick virtual ──
-  let touchStartX=0, touchStartY=0, touchActive=false;
   sec.addEventListener('touchstart', e=>{
-    e.preventDefault();
     if(e.touches.length){
       const r=gCanvas.getBoundingClientRect();
-      touchStartX=e.touches[0].clientX-r.left;
-      touchStartY=e.touches[0].clientY-r.top;
-      touchActive=true;
-      // La nave apunta hacia donde se toca
-      G.mouse.x=touchStartX;
-      G.mouse.y=touchStartY;
+      G.mouse.x=e.touches[0].clientX-r.left;
+      G.mouse.y=e.touches[0].clientY-r.top;
       gShoot();
     }
-  },{passive:false});
+  },{passive:true});
   sec.addEventListener('touchmove', e=>{
-    e.preventDefault();
-    if(e.touches.length && touchActive){
+    if(e.touches.length){
       const r=gCanvas.getBoundingClientRect();
-      const tx=e.touches[0].clientX-r.left;
-      const ty=e.touches[0].clientY-r.top;
-      G.mouse.x=tx; G.mouse.y=ty;
-      // Calcular dirección del desliz para mover la nave
-      const ddx=tx-touchStartX, ddy=ty-touchStartY;
-      const dist=Math.hypot(ddx,ddy);
-      if(dist>12){
-        G.touchDir.x = ddx/dist;
-        G.touchDir.y = ddy/dist;
-      } else {
-        G.touchDir.x=0; G.touchDir.y=0;
-      }
+      G.mouse.x=e.touches[0].clientX-r.left;
+      G.mouse.y=e.touches[0].clientY-r.top;
     }
-  },{passive:false});
-  sec.addEventListener('touchend', e=>{
-    e.preventDefault();
-    touchActive=false;
-    G.touchDir.x=0; G.touchDir.y=0;
-  },{passive:false});
+  },{passive:true});
   document.addEventListener('keydown', gKeyDown);
   document.addEventListener('keyup',   gKeyUp);
 }
@@ -996,8 +973,7 @@ function gUpdatePowerIcons(){
 }
 function gScorePop(x,y,pts){
   const el=document.createElement('div');
-  const cx=Math.min(Math.max(x,40),G.W-40), cy=Math.min(Math.max(y,40),G.H-40);
-  el.style.cssText=`position:absolute;left:${cx}px;top:${cy}px;font-family:'Orbitron',sans-serif;font-size:.7rem;color:${GCOL.dorado};text-shadow:0 0 10px ${GCOL.dorado};pointer-events:none;z-index:20;transform:translate(-50%,-50%);animation:gScorePop .9s forwards`;
+  el.style.cssText=`position:absolute;left:${x}px;top:${y}px;font-family:'Orbitron',sans-serif;font-size:.75rem;color:${GCOL.dorado};text-shadow:0 0 10px ${GCOL.dorado};pointer-events:none;z-index:20;transform:translate(-50%,-50%);animation:gScorePop .9s forwards`;
   el.textContent='+'+pts;
   gById('secJuego').appendChild(el);
   setTimeout(()=>el.remove(),900);
