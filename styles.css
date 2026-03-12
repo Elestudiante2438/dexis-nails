@@ -83,7 +83,7 @@ button,input,textarea,select{font-family:var(--font-body)}
 .panel-header{padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.06);
   display:flex;align-items:center;gap:12px;flex-shrink:0}
 .panel-header-title{font-family:var(--font-display);font-size:.9rem;letter-spacing:2px;color:white}
-.panel-body{flex:1;overflow-y:auto;padding:20px}
+.panel-body{flex:1;overflow-y:auto;padding:20px;-webkit-overflow-scrolling:touch}
 
 /* ═══════════════════════════════════════ SECCIÓN INICIO */
 #secInicio{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:20px;text-align:center;padding:20px}
@@ -568,42 +568,22 @@ button,input,textarea,select{font-family:var(--font-body)}
   #gBtnSalir { font-size:.42rem !important; padding:2px 8px !important; }
 }
 
-/* ── ADMIN SCROLL ── */
-.admin-panel.active {
-  display: block;
-  overflow-y: auto;
-  max-height: 100%;
-}
+
+
+
 .panel-body {
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* ── ADMIN SCROLL AMPLIO ── */
-#secAdmin .panel-body,
-#secAdmin .section-inner {
   overflow-y: auto !important;
   -webkit-overflow-scrolling: touch;
-  max-height: calc(100vh - 200px);
+  padding-bottom: 100px !important;
 }
-.admin-panel.active {
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-/* Scrollbar visible */
-#secAdmin ::-webkit-scrollbar { width: 6px; }
-#secAdmin ::-webkit-scrollbar-track { background: rgba(255,255,255,.05); border-radius: 3px; }
-#secAdmin ::-webkit-scrollbar-thumb { background: rgba(0,245,212,.4); border-radius: 3px; }
 
-/* ── ADMIN SCROLL DEFINITIVO ── */
-#secAdmin { display:flex; flex-direction:column; height:100%; overflow:hidden; }
-#secAdmin .panel-body {
+/* ── ADMIN SCROLL CORRECTO ── */
+#mainPanel { overflow: hidden; }
+.panel-body { 
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  height: 0; /* fuerza que flex calcule bien */
   flex: 1;
-  overflow-y: auto !important;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 40px !important;
 }
-#secAdmin .admin-panel.active {
-  overflow-y: visible;
-  padding-bottom: 20px;
-}
+.admin-panel { display: none; }
+.admin-panel.active { display: block; }
