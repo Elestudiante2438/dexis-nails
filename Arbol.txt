@@ -1,0 +1,131 @@
+tu-proyecto/
+│
+├── .env
+├── .gitignore
+├── components.json
+├── eslint.config.mjs
+├── next.config.ts
+├── package.json
+├── postcss.config.mjs
+├── tailwind.config.ts
+├── tsconfig.json
+│
+├── prisma/
+│   └── schema.prisma
+│
+├── public/
+│   ├── Dexi.jpeg
+│   ├── Dexi.mp4
+│   ├── Universo.mp4
+│   ├── logo.svg
+│   └── robots.txt
+│
+└── src/
+    ├── app/
+    │   ├── page.tsx
+    │   ├── layout.tsx
+    │   ├── globals.css
+    │   └── api/
+    │       ├── route.ts
+    │       ├── chat/route.ts
+    │       ├── diagnostico/route.ts
+    │       ├── podologia/route.ts
+    │       ├── servicios/route.ts
+    │       ├── cupones/route.ts
+    │       ├── giftcards/route.ts
+    │       ├── ordenes-compra/route.ts
+    │       ├── clientes/
+    │       │   ├── route.ts
+    │       │   └── [id]/route.ts
+    │       ├── productos/
+    │       │   ├── route.ts
+    │       │   └── [id]/route.ts
+    │       ├── proveedores/
+    │       │   ├── route.ts
+    │       │   └── [id]/route.ts
+    │       ├── reservas/
+    │       │   ├── route.ts
+    │       │   └── [id]/route.ts
+    │       ├── admin/
+    │       │   ├── login/route.ts
+    │       │   ├── dashboard/route.ts
+    │       │   └── profesionales/route.ts
+    │       ├── caja/
+    │       │   ├── abrir/route.ts
+    │       │   ├── cerrar/route.ts
+    │       │   └── actual/route.ts
+    │       └── comisiones/
+    │           └── pendientes/route.ts
+    │
+    ├── components/
+    │   └── ui/
+    │       ├── accordion.tsx
+    │       ├── alert.tsx
+    │       ├── alert-dialog.tsx
+    │       ├── aspect-ratio.tsx
+    │       ├── avatar.tsx
+    │       ├── badge.tsx
+    │       ├── breadcrumb.tsx
+    │       ├── button.tsx
+    │       ├── calendar.tsx
+    │       ├── card.tsx
+    │       ├── carousel.tsx
+    │       ├── chart.tsx
+    │       ├── checkbox.tsx
+    │       ├── collapsible.tsx
+    │       ├── command.tsx
+    │       ├── context-menu.tsx
+    │       ├── dialog.tsx
+    │       ├── drawer.tsx
+    │       ├── dropdown-menu.tsx
+    │       ├── form.tsx
+    │       ├── hover-card.tsx
+    │       ├── input.tsx
+    │       ├── input-otp.tsx
+    │       ├── label.tsx
+    │       ├── menubar.tsx
+    │       ├── navigation-menu.tsx
+    │       ├── pagination.tsx
+    │       ├── popover.tsx
+    │       ├── progress.tsx
+    │       ├── radio-group.tsx
+    │       ├── resizable.tsx
+    │       ├── scroll-area.tsx
+    │       ├── select.tsx
+    │       ├── separator.tsx
+    │       ├── sheet.tsx
+    │       ├── sidebar.tsx
+    │       ├── skeleton.tsx
+    │       ├── slider.tsx
+    │       ├── sonner.tsx
+    │       ├── switch.tsx
+    │       ├── table.tsx
+    │       ├── tabs.tsx
+    │       ├── textarea.tsx
+    │       ├── toast.tsx
+    │       ├── toaster.tsx
+    │       ├── toggle.tsx
+    │       ├── toggle-group.tsx
+    │       └── tooltip.tsx
+    │
+    ├── hooks/
+    │   ├── use-mobile.ts
+    │   └── use-toast.ts
+    │
+    ├── lib/
+    │   ├── db.ts
+    │   ├── types.ts
+    │   └── utils.ts
+    │
+    └── store/
+        └── dexis-store.ts
+
+
+Raíz: 9 archivos
+Prisma: 1 archivo
+Public: 5 archivos (incluyendo videos/imagen)
+src/app: 3 archivos + 23 rutas API
+src/components/ui: 48 componentes
+src/hooks: 2 archivos
+src/lib: 3 archivos
+src/store: 1 archivo
