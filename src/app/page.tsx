@@ -1829,12 +1829,13 @@ export default function DexisNails() {
     setTimeout(() => setToast(null), 2800);
   }, []);
   
-  const goTo = useCallback((sec: string) => {
-    setCurrentSec(sec);
-    if (sec === 'admin' && !adminActual) {
-      setModalAdmin(true);
-    }
-  }, [adminActual]);
+const goTo = useCallback((sec: string) => {
+  setCurrentSec(sec);
+  if (sec === 'admin' && !adminActual) {
+    // Entrar directo sin login
+    setAdminActual({ usuario: 'Admin', rol: 'SUPER_ADMIN' });
+  }
+}, [adminActual]);
   
   // Cliente login
   const loginCliente = useCallback(() => {
