@@ -1,0 +1,898 @@
+// ========================================
+// DEXI'S NAILS - SCHEMA EMPRESARIAL COMPLETO
+// Preparado para escalar de 1 a 7+ profesionales
+// 🇨🇴 Colombia - IVA preparado pero dormido
+// ========================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 🔐 AUTENTICACIÓN Y ROLES
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+model AdminUser {
+  id            String      @id @default(cuid())
+  email         String      @unique
+  password      String
+  nombre        String
+  rol           RolUsuario  @default(PROFESIONAL)
+  activo        Boolean     @default(true)
+  foto          String?
+  telefono      String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  reservas      Reserva[]
+  comisiones    Comision[]
+  horarios      HorarioProfesional[]
+  asistencias   Asistencia[]
+  bloqueos      BloqueoAgenda[]
+
+  @@map("admin_users")
+}
+
+enum RolUsuario {
+  SUPER_ADMIN
+  GERENTE
+  RECEPCIONISTA
+  PROFESIONAL
+  INVENTARIO
+  MARKETING
+  CONTABILIDAD
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 👥 CLIENTES Y FIDELIZACIÓN
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+model Cliente {
+  id                String          @id @default(cuid())
+  cedula            String?         @unique
+  nombre            String
+  email             String?
+  telefono          String?
+  fechaNacimiento   DateTime?
+  notas             String?
+  puntosFidelidad   Int             @default(0)
+  nivelFidelidad    NivelFidelidad  @default(BRONCE)
+  fechaUltimaVisita DateTime?
+  activo            Boolean         @default(true)
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  reservas          Reserva[]
+  compras           Compra[]
+  giftCardsUsadas   GiftCardRedencion[]
+  cuponesUsados     CuponRedencion[]
+  encuestas         EncuestaRespuesta[]
+
+  @@map("clientes")
+}
+
+enum NivelFidelidad {
+  BRONCE
+  PLATA
+  ORO
+  DIAMANTE
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 🏭 PROVEEDORES
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+model Proveedor {
+  id          String       @id @default(cuid())
+  nombre      String
+  nit         String?      @unique
+  contacto    String?
+  email       String?
+  telefono    String?
+  direccion   String?
+  ciudad      String?
+  pais        String       @default("Colombia")
+  web         String?
+  notas       String?
+  rating      Float        @default(0)
+  activo      Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  productos       ProductoProveedor[]
+  ordenes         OrdenCompra[]
+  evaluaciones    EvaluacionProveedor[]
+  contratos       ContratoProveedor[]
+
+  @@map("proveedores")
+}
+
+model EvaluacionProveedor {
+  id              String     @id @default(cuid())
+  proveedorId     String
+  fecha           DateTime   @default(now())
+
+  puntualidad     Int
+  calidad         Int
+  precio          Int
+  servicio        Int
+  notas           String?
+
+  puntajeTotal    Float      @default(0)
+
+  proveedor       Proveedor  @relation(fields: [proveedorId], references: [id], onDelete: Cascade)
+
+  @@map("evaluaciones_proveedor")
+}
+
+model ContratoProveedor {
+  id                String     @id @default(cuid())
+  proveedorId       String
+  numeroContrato    String
+  fechaInicio       DateTime
+  fechaFin          DateTime?
+  terminos          String
+  descuentoAcordado Float      @default(0)
+  plazoPago         Int        @default(30)
+  activo            Boolean    @default(true)
+
+  proveedor         Proveedor  @relation(fields: [proveedorId], references: [id], onDelete: Cascade)
+
+  @@map("contratos_proveedor")
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 📦 INVENTARIO Y PRODUCTOS
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+model CategoriaProducto {
+  id          String      @id @default(cuid())
+  nombre      String
+  descripcion String?
+  activo      Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+
+  productos   Producto[]
+
+  @@map("categorias_producto")
+}
+
+model Producto {
+  id                String      @id @default(cuid())
+  codigo            String      @unique
+  codigoBarras      String?     @unique
+  nombre            String
+  descripcion       String?
+  categoriaId       String?
+
+  precioCosto       Float
+  precioVenta       Float
+  precioMayoreo     Float?
+
+  stockActual       Int         @default(0)
+  stockMinimo       Int         @default(5)
+  stockMaximo       Int?
+  puntoReorden      Int         @default(10)
+
+  ubicacion         String?
+
+  fechaCaducidad    DateTime?
+  fechaUltimaCompra DateTime?
+
+  activo            Boolean     @default(true)
+  esPerecedero      Boolean     @default(false)
+  diasGarantia      Int?
+
+  ivaPorcentaje     Float       @default(19)
+  ivaActivo         Boolean     @default(false)
+
+  tipo              String      @default("producto") // "producto" o "colonia"
+  notas             String?
+  foto              String?
+
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  categoria         CategoriaProducto?  @relation(fields: [categoriaId], references: [id])
+  proveedores       ProductoProveedor[]
+  movimientos       MovimientoInventario[]
+  detallesCompra    DetalleCompra[]
+  detallesOrden     DetalleOrdenCompra[]
+  detallesServicio  DetalleServicioUsado[]
+
+  @@map("productos")
+}
+
+model ProductoProveedor {
+  id              String     @id @default(cuid())
+  productoId      String
+  proveedorId     String
+  codigoProveedor String?
+  precioCosto     Float
+  tiempoEntrega   Int        @default(7)
+  esPrincipal     Boolean    @default(false)
+
+  producto        Producto   @relation(fields: [productoId], references: [id], onDelete: Cascade)
+  proveedor       Proveedor  @relation(fields: [proveedorId], references: [id], onDelete: Cascade)
+
+  @@map("productos_proveedor")
+}
+
+model MovimientoInventario {
+  id              String          @id @default(cuid())
+  productoId      String
+  tipo            TipoMovimiento
+  cantidad        Int
+  stockAnterior   Int
+  stockNuevo      Int
+  motivo          String?
+  referencia      String?
+  usuarioId       String?
+  createdAt       DateTime        @default(now())
+
+  producto        Producto        @relation(fields: [productoId], references: [id])
+
+  @@map("movimientos_inventario")
+}
+
+enum TipoMovimiento {
+  ENTRADA
+  SALIDA_VENTA
+  SALIDA_SERVICIO
+  AJUSTE
+  PERDIDA
+  DEVOLUCION
+  TRANSFERENCIA
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 🛒 ÓRDENES DE COMPRA A PROVEEDORES
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+model OrdenCompra {
+  id              String       @id @default(cuid())
+  numeroOrden     String       @unique
+  proveedorId     String
+
+  fechaOrden      DateTime     @default(now())
+  fechaEntrega    DateTime?
+  fechaRecibido   DateTime?
+
+  estado          EstadoOrden  @default(PENDIENTE)
+
+  subtotal        Float        @default(0)
+  descuento       Float        @default(0)
+  iva             Float        @default(0)
+  total           Float        @default(0)
+
+  notas           String?
+  direccionEnvio  String?
+
+  creadoPor       String?
+  recibidoPor     String?
+
+  proveedor       Proveedor    @relation(fields: [proveedorId], references: [id])
+  detalles        DetalleOrdenCompra[]
+
+  @@map("ordenes_compra")
+}
+
+model DetalleOrdenCompra {
+  id                String      @id @default(cuid())
+  ordenId           String
+  productoId        String
+
+  cantidad          Int
+  precioUnitario    Float
+  subtotal          Float
+
+  cantidadRecibida  Int         @default(0)
+
+  orden             OrdenCompra @relation(fields: [ordenId], references: [id], onDelete: Cascade)
+  producto          Producto    @relation(fields: [productoId], references: [id])
+
+  @@map("detalles_orden_compra")
+}
+
+enum EstadoOrden {
+  BORRADOR
+  PENDIENTE
+  CONFIRMADA
+  EN_CAMINO
+  RECIBIDA_PARCIAL
+  RECIBIDA_COMPLETA
+  CANCELADA
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 💇 SERVICIOS DEL SALÓN
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+model Servicio {
+  id                  String      @id @default(cuid())
+  codigo              String      @unique
+  nombre              String
+  descripcion         String?
+  categoria           String?
+
+  duracion            Int
+  precio              Float
+  precioPromocion     Float?
+
+  comisionPorcentaje  Float       @default(30)
+
+  activo              Boolean     @default(true)
+  requiereDeposito    Boolean     @default(false)
+
+  productosUsados     DetalleServicioUsado[]
+  reservas            Reserva[]
+
+  @@map("servicios")
+}
+
+model DetalleServicioUsado {
+  id          String    @id @default(cuid())
+  servicioId  String?
+  productoId  String
+  cantidad    Float
+
+  servicio    Servicio? @relation(fields: [servicioId], references: [id], onDelete: Cascade)
+  producto    Producto  @relation(fields: [productoId], references: [id])
+
+  @@map("detalles_servicio_usado")
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 📅 RESERVAS Y AGENDA
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+model Reserva {
+  id                String        @id @default(cuid())
+  codigo            String        @unique
+
+  clienteId         String?
+  profesionalId     String?
+  servicioId        String?
+
+  fecha             String
+  horaInicio        String
+  horaFin           String?
+
+  estado            EstadoReserva @default(PENDIENTE)
+
+  precioOriginal    Float?
+  descuento         Float         @default(0)
+  precioFinal       Float?
+
+  notas             String?
+  recordatorioEnviado Boolean    @default(false)
+
+  rating            Int?
+  comentario        String?
+
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  cliente           Cliente?      @relation(fields: [clienteId], references: [id])
+  profesional       AdminUser?    @relation(fields: [profesionalId], references: [id])
+  servicio          Servicio?     @relation(fields: [servicioId], references: [id])
+  pago              Pago?
+
+  @@map("reservas")
+}
+
+enum EstadoReserva {
+  PENDIENTE
+  CONFIRMADA
+  EN_PROCESO
+  COMPLETADA
+  CANCELADA
+  NO_ASISTIO
+  REPROGRAMADA
+}
+
+model HorarioProfesional {
+  id            String    @id @default(cuid())
+  profesionalId String
+  diaSemana     Int
+  horaInicio    String
+  horaFin       String
+  activo        Boolean   @default(true)
+
+  profesional   AdminUser @relation(fields: [profesionalId], references: [id])
+
+  @@map("horarios_profesional")
+}
+
+model BloqueoAgenda {
+  id            String        @id @default(cuid())
+  profesionalId String?
+  fechaInicio   DateTime
+  fechaFin      DateTime
+  motivo        String?
+  tipo          TipoBloqueo
+
+  profesional   AdminUser?    @relation(fields: [profesionalId], references: [id])
+
+  @@map("bloqueos_agenda")
+}
+
+enum TipoBloqueo {
+  VACACIONES
+  INCAPACIDAD
+  CAPACITACION
+  PERSONAL
+  OTRO
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 💰 VENTAS (TIENDA Y SERVICIOS)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+model Compra {
+  id                String       @id @default(cuid())
+  numeroFactura     String       @unique
+
+  clienteId         String?
+
+  fecha             DateTime     @default(now())
+
+  subtotal          Float
+  descuento         Float        @default(0)
+  iva               Float        @default(0)
+  total             Float
+
+  metodoPago        MetodoPago
+  estado            EstadoCompra @default(COMPLETADA)
+
+  notas             String?
+
+  direccionEnvio    String?
+  costoEnvio        Float        @default(0)
+  fechaEnvio        DateTime?
+  codigoSeguimiento String?
+
+  cliente           Cliente?     @relation(fields: [clienteId], references: [id])
+  detalles          DetalleCompra[]
+  pago              Pago?
+
+  @@map("compras")
+}
+
+model DetalleCompra {
+  id            String    @id @default(cuid())
+  compraId      String
+  productoId    String
+
+  cantidad      Int
+  precioUnitario Float
+  subtotal      Float
+
+  compra        Compra    @relation(fields: [compraId], references: [id], onDelete: Cascade)
+  producto      Producto  @relation(fields: [productoId], references: [id])
+
+  @@map("detalles_compra")
+}
+
+enum MetodoPago {
+  EFECTIVO
+  TARJETA_CREDITO
+  TARJETA_DEBITO
+  TRANSFERENCIA
+  NEQUI
+  DAVIPLATA
+  PSE
+  GIFT_CARD
+  PUNTOS_FIDELIDAD
+  MIXTO
+}
+
+enum EstadoCompra {
+  PENDIENTE
+  COMPLETADA
+  CANCELADA
+  ENVIANDO
+  ENTREGADA
+  DEVUELTA
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 💵 PAGOS Y TRANSACCIONES
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+model Pago {
+  id                  String      @id @default(cuid())
+  reservaId           String?     @unique
+  compraId            String?     @unique
+
+  monto               Float
+  metodoPago          MetodoPago
+  codigoTransaccion   String?
+
+  fecha               DateTime    @default(now())
+  estado              EstadoPago  @default(COMPLETADO)
+
+  pagoPadreId         String?
+
+  reserva             Reserva?    @relation(fields: [reservaId], references: [id])
+  compra              Compra?     @relation(fields: [compraId], references: [id])
+
+  @@map("pagos")
+}
+
+enum EstadoPago {
+  PENDIENTE
+  COMPLETADO
+  CANCELADO
+  REEMBOLSADO
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 💵 CAJA Y FLUJO DE EFECTIVO
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+model Caja {
+  id              String          @id @default(cuid())
+  fecha           DateTime        @default(now())
+
+  montoApertura   Float
+  horaApertura    DateTime        @default(now())
+  abiertaPor      String?
+
+  montoCierre     Float?
+  horaCierre      DateTime?
+  cerradaPor      String?
+
+  ventasEfectivo  Float           @default(0)
+  ventasTarjeta   Float           @default(0)
+  ventasOtras     Float           @default(0)
+
+  retiros         Float           @default(0)
+  ingresosExtra   Float           @default(0)
+
+  diferencia      Float           @default(0)
+  notas           String?
+
+  estado          EstadoCaja      @default(ABIERTA)
+
+  movimientos     MovimientoCaja[]
+
+  @@map("cajas")
+}
+
+enum EstadoCaja {
+  ABIERTA
+  CERRADA
+  CUADRADA
+  DIFERENCIA
+}
+
+model MovimientoCaja {
+  id              String              @id @default(cuid())
+  cajaId          String
+  tipo            TipoMovimientoCaja
+  monto           Float
+  concepto        String
+  comprobante     String?
+  registradoPor   String?
+  createdAt       DateTime            @default(now())
+
+  caja            Caja                @relation(fields: [cajaId], references: [id], onDelete: Cascade)
+
+  @@map("movimientos_caja")
+}
+
+enum TipoMovimientoCaja {
+  VENTA_EFECTIVO
+  RETIRO
+  INGRESO_EXTRA
+  GASTO
+  CAMBIO
+  AJUSTE
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 👥 NÓMINA Y COMISIONES
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+model Comision {
+  id              String          @id @default(cuid())
+  profesionalId   String
+  reservaId       String?
+
+  fecha           DateTime        @default(now())
+
+  montoServicio   Float
+  porcentaje      Float
+  montoComision   Float
+
+  estado          EstadoComision  @default(PENDIENTE)
+  fechaPago       DateTime?
+
+  profesional     AdminUser       @relation(fields: [profesionalId], references: [id])
+
+  @@map("comisiones")
+}
+
+enum EstadoComision {
+  PENDIENTE
+  PAGADA
+  CANCELADA
+}
+
+model Asistencia {
+  id              String            @id @default(cuid())
+  profesionalId   String
+  fecha           DateTime          @default(now())
+
+  horaEntrada     DateTime?
+  horaSalida      DateTime?
+
+  horasTrabajadas Float?
+
+  estado          EstadoAsistencia  @default(PENDIENTE)
+  notas           String?
+
+  profesional     AdminUser         @relation(fields: [profesionalId], references: [id])
+
+  @@map("asistencias")
+}
+
+enum EstadoAsistencia {
+  PENDIENTE
+  PRESENTE
+  AUSENTE
+  TARDANZA
+  PERMISO
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 🎯 MARKETING Y FIDELIZACIÓN
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+model Cupon {
+  id              String          @id @default(cuid())
+  codigo          String          @unique
+
+  descripcion     String
+
+  tipoDescuento   TipoDescuento
+  valor           Float
+  montoMinimo     Float?
+  usosMaximos     Int?
+  usosActuales    Int             @default(0)
+
+  fechaInicio     DateTime
+  fechaFin        DateTime
+
+  activo          Boolean         @default(true)
+  unicoPorCliente Boolean         @default(false)
+
+  redenciones     CuponRedencion[]
+
+  @@map("cupones")
+}
+
+enum TipoDescuento {
+  PORCENTAJE
+  MONTO_FIJO
+  SERVICIO_GRATIS
+}
+
+model CuponRedencion {
+  id              String    @id @default(cuid())
+  cuponId         String
+  clienteId       String?
+  fecha           DateTime  @default(now())
+  montoDescontado Float
+
+  cupon           Cupon     @relation(fields: [cuponId], references: [id], onDelete: Cascade)
+  cliente         Cliente?  @relation(fields: [clienteId], references: [id])
+
+  @@map("cupones_redencion")
+}
+
+model GiftCard {
+  id                String            @id @default(cuid())
+  codigo            String            @unique
+
+  montoOriginal     Float
+  montoDisponible   Float
+  montoUsado        Float             @default(0)
+
+  compradorNombre   String?
+  compradorEmail    String?
+
+  destinatarioNombre String?
+  destinatarioEmail  String?
+  mensaje           String?
+
+  fechaCompra       DateTime          @default(now())
+  fechaVencimiento  DateTime?
+
+  estado            EstadoGiftCard    @default(ACTIVA)
+
+  redenciones       GiftCardRedencion[]
+
+  @@map("gift_cards")
+}
+
+enum EstadoGiftCard {
+  ACTIVA
+  AGOTADA
+  VENCIDA
+  CANCELADA
+}
+
+model GiftCardRedencion {
+  id          String      @id @default(cuid())
+  giftCardId  String
+  clienteId   String?
+  fecha       DateTime    @default(now())
+  monto       Float
+
+  giftCard    GiftCard    @relation(fields: [giftCardId], references: [id], onDelete: Cascade)
+  cliente     Cliente?    @relation(fields: [clienteId], references: [id])
+
+  @@map("gift_cards_redencion")
+}
+
+model CampanaMarketing {
+  id              String          @id @default(cuid())
+  nombre          String
+  descripcion     String?
+
+  tipo            TipoCampana
+  canal           CanalMarketing
+
+  mensaje         String
+  plantilla       String?
+
+  filtroClientes  String?
+
+  fechaProgramada DateTime?
+  fechaEnviada    DateTime?
+
+  totalEnviados   Int             @default(0)
+  totalAbiertos   Int             @default(0)
+  totalClicks     Int             @default(0)
+
+  estado          EstadoCampana   @default(BORRADOR)
+
+  createdAt       DateTime        @default(now())
+
+  @@map("campanas_marketing")
+}
+
+enum TipoCampana {
+  PROMOCION
+  RECORDATORIO_CITA
+  CUMPLEANOS
+  REACTIVACION
+  BIENVENIDA
+  ENCUESTA
+}
+
+enum CanalMarketing {
+  EMAIL
+  SMS
+  WHATSAPP
+  PUSH
+}
+
+enum EstadoCampana {
+  BORRADOR
+  PROGRAMADA
+  ENVIANDO
+  ENVIADA
+  CANCELADA
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 📝 ENCUESTAS Y FEEDBACK
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+model Encuesta {
+  id          String              @id @default(cuid())
+  titulo      String
+  descripcion String?
+
+  preguntas   String
+
+  activa      Boolean             @default(true)
+
+  respuestas  EncuestaRespuesta[]
+
+  @@map("encuestas")
+}
+
+model EncuestaRespuesta {
+  id          String      @id @default(cuid())
+  encuestaId  String?
+  clienteId   String?
+  reservaId   String?
+
+  respuestas  String
+  rating      Int?
+  comentario  String?
+
+  fecha       DateTime    @default(now())
+
+  encuesta    Encuesta?   @relation(fields: [encuestaId], references: [id], onDelete: Cascade)
+  cliente     Cliente?    @relation(fields: [clienteId], references: [id])
+
+  @@map("encuestas_respuesta")
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 📊 REPORTES Y AUDITORÍA
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+model AuditoriaLog {
+  id              String    @id @default(cuid())
+  usuarioId       String?
+  accion          String
+  tabla           String
+  registroId      String
+  datosAnteriores String?
+  datosNuevos     String?
+  ip              String?
+  userAgent       String?
+  createdAt       DateTime  @default(now())
+
+  @@map("auditoria_logs")
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ⚙️ CONFIGURACIÓN DEL SISTEMA
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+model Configuracion {
+  id          String    @id @default(cuid())
+  clave       String    @unique
+  valor       String
+  descripcion String?
+  tipo        String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("configuracion")
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 🎮 JUEGO (SPACE SHOOTER)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+model GameScore {
+  id            String    @id @default(cuid())
+  jugadorNombre String
+  score         Int
+  nivel         Int       @default(1)
+  createdAt     DateTime  @default(now())
+
+  @@map("game_scores")
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 📍 SUCURSALES (FUTURO)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+model Sucursal {
+  id        String    @id @default(cuid())
+  nombre    String
+  direccion String
+  ciudad    String
+  telefono  String?
+  email     String?
+
+  activa    Boolean   @default(true)
+
+  createdAt DateTime  @default(now())
+
+  @@map("sucursales")
+}
